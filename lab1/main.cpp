@@ -1,5 +1,6 @@
 #include "myRect.h"
 #include "myString.h"
+#include "Bochka.h"
 
 //#define stop __asm nop
 
@@ -250,15 +251,17 @@ int main() {
     //Требуется определить номер итерации, на которой концентрация спирта в
     //первой бочке станет меньше 50%.
 
-    //Bochka spirt(...);
-    //Bochka water(...);
-    //...
-    //	while(концентрация спирта в бочке spirt > 50%)
-    //	{
-    //		spirt.Pereliv(water); //или spirt.Pereliv(water, объем_кружки);
-    //		water.Pereliv(spirt); // аналогично
-    //		...
+    Bochka spirt(200, .96);
+    Bochka water(200, 0);
 
-    //	}
+    while (spirt.GetConcentration() > .5) {
+        spirt.Pereliv(water, 1); //или spirt.Pereliv(water, объем_кружки);
+        water.Pereliv(spirt, 1); // аналогично
+    }
+    cout << "The first barrel has " << spirt.GetVolume() << "l and a concentration of alcohol is "
+         << spirt.GetConcentration() << endl;
+    cout << "The second barrel has " << water.GetVolume() << "l and a concentration of alcohol is "
+         << water.GetConcentration() << endl;
 
+    cout << "stop" << endl;
 }//end_main

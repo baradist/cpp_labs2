@@ -194,8 +194,8 @@ int main() {
     //количество указателей на строки, а возвращать объект MyString,
     //в котором строка будет конкатенацией параметров
     {
-        MyString res = concatenateMyStrings("One", "Two", nullptr);
-        cout << res.GetString() << endl;
+//        MyString res = concatenateMyStrings("One", "Two", nullptr);
+//        cout << res.GetString() << endl;
     }
 
     //Задание 7.Массив объектов класса.
@@ -204,29 +204,42 @@ int main() {
         // типа MyString. Например:
         //Как задать размерность? N=3
         //MyString arstr[N] = {...
+        size_t N = 3;
+        MyString arstr[N] = {MyString("First"), MyString("Second")};
 
         //Проверка - печать строк-членов класса
-
+        for (int i = 0; i < N; ++i) {
+            cout << arstr[i].GetString();
+        }
+        cout << endl;
         //Увеличьте размер массива, не изменяя список инициализаторов:
-        //N=5???
-
+        N=5;
+        MyString arstr1[N] = {MyString("First"), MyString("Second")};
+        for (int i = 0; i < N; ++i) {
+            cout << arstr1[i].GetString();
+        }
+        cout << endl;
         //Объявите и проинициализируйте массив объектов	типа Rect.
-
+        Rect rects[3] = {Rect(), Rect(1, 2, 3, 4)};
+        cout << "stop" << endl;
     }
-    cout << "stop" << endl;
-/*
 	//Задание 8.Массив указателей на объекты класса.
 	{
 	//Объявите и проинициализируйте массив arPtr из трех
 	//указателей на объекты типа MyString.
-
+        size_t N = 3;
+        MyString * pMyStrings = new MyString[N];
+        pMyStrings[0] = MyString("First");
+        pMyStrings[1] = MyString("Second");
+        pMyStrings[2] = MyString("Third");
 
 	//Печать строк-членов класса
-
-
-	}
-	cout << "stop" << endl;
-*/
+        for (int i = 0; i < N; ++i) {
+            cout << pMyStrings[i].GetString();
+        }
+        cout << endl;
+        cout << "stop" << endl;
+    }
     //Задание 9.  Решите с помощью классов следующую задачу:
     //даны две бочки известного объема. В одной бочке в начальный момент
     //времени содержится спирт (96%), в другой – вода.

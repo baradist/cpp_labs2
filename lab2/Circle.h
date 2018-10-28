@@ -5,6 +5,10 @@
 
 class Circle : public Shape {
 public:
+    Circle(const Shape &that);
+
+    Circle(const Circle &that);
+
     Circle(double x = 0, double y = 0, double radius = 0, Color color = WHITE);
 
     ~Circle();

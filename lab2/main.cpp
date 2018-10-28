@@ -3,13 +3,16 @@
 // Битовые поля.
 
 
-#include <tchar.h>
-#define	  stop __asm nop
+//#include <tchar.h>
+//#define	  stop __asm nop
+#include <iostream>
+#include "Rect.h"
+#include "Circle.h"
 
-int _tmain(int argc, _TCHAR* argv[])
+using namespace std;
+
+int main()
 {
-
-
 	//Задание 1.Простое наследование.Аргументы конструктора,
 	// передаваемые в базовый класс.
 
@@ -21,7 +24,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//цветной => в базовом классе можно ввести переменную, которая
 	//будет определять цвет фигуры.
 	//Подсказка: для хранения цвета объявите перечисление (RED,GREEN,BLUE...);
-	
+    Circle circle;
+    Rect rect;
 
 	
 	//В конструкторах производных классов предусмотрите передачу
@@ -33,7 +37,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-	stop
+	cout << "stop" << endl;
 //////////////////////////////////////////////////////////////////////
 /*
 	//Задание 2.Виртуальные функции.
@@ -56,7 +60,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		s.WhereAmI();	//	???
 		r.WhereAmI();	//	???
 		c.WhereAmI();	//	???
-		stop
+		cout << "stop" << endl;
 
 
 		Shape* pShape = &s;
@@ -65,7 +69,7 @@ int _tmain(int argc, _TCHAR* argv[])
     	pShape->WhereAmI();	//	???
 		pRect->WhereAmI();	//	???
 		pCircle->WhereAmI(); //	???
-		stop
+		cout << "stop" << endl;
 
 
 		//Заполните ... согласно комментариям
@@ -75,7 +79,7 @@ int _tmain(int argc, _TCHAR* argv[])
     	...WhereAmI();	//вызов посредством rShape	???
 		...WhereAmI();	//вызов посредством	rRect	???
 		...WhereAmI(); //вызов посредством rCircle	???
-		stop
+		cout << "stop" << endl;
 	}
 */
 
@@ -106,7 +110,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Вызовите для каждого элемента массива метод WhereAmI()
 	
 
-	stop
+	cout << "stop" << endl;
 */
 
 /*
@@ -133,7 +137,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Rect r(...);
 		Shape* p = &r;	
 		p->WhereAmI();//...
-		stop
+		cout << "stop" << endl;
 	
 		
 		//4a Оператор разрешения области видимости.

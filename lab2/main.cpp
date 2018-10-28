@@ -117,11 +117,19 @@ int main() {
         //  Now I am in Shape's destructor!
 
         Circle c; // Now I am in Shape's destructor!
-        cout << "stop" << endl;
     }
+    cout << "stop" << endl;
     // b) Добавьте в объявление деструкторов ключевое слово virtual
     //Выполните фрагмент.Объясните разницу.
+    {
+        Shape s; // Now I am in Circle's destructor!
+        //  Now I am in Shape's destructor!
+        Rect r; // Now I am in Rect's destructor!
+        //  Now I am in Shape's destructor!
 
+        Circle c; // Now I am in Shape's destructor!
+    }
+    cout << "stop" << endl;
 
 //	//Подумайте: какие конструкторы вызываются в следующей строке?
 //		//Если в разработанных классов каких-то конструкторов

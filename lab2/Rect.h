@@ -12,7 +12,7 @@ public:
 
     Rect(double x = 0, double y = 0, double width = 0, double height = 0, Color color = WHITE);
 
-    ~Rect();
+    virtual ~Rect();
 
     double GetSquare() const;
 

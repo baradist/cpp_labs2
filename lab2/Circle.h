@@ -11,7 +11,7 @@ public:
 
     Circle(double x = 0, double y = 0, double radius = 0, Color color = WHITE);
 
-    ~Circle();
+    virtual ~Circle();
 
     double GetSquare() const;
 

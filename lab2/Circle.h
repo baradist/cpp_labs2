@@ -7,6 +7,8 @@ class Circle : public Shape {
 public:
     Circle(double x = 0, double y = 0, double radius = 0, Color color = WHITE);
 
+    ~Circle();
+
     double GetSquare() const;
 };
 

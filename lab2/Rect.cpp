@@ -4,6 +4,10 @@ Rect::Rect(double x, double y, double width, double height, Color color) : Shape
     this->sizeY = height;
 }
 
+Rect::~Rect() {
+
+}
+
 double Rect::GetSquare() const {
     return size * sizeY;
 }

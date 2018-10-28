@@ -7,6 +7,6 @@ Shape::Shape(double x, double y, double size, Color color) {
     this->color = color;
 }
 
-//double Shape::GetSquare() const {
-//    return 0;
-//}
+Shape::~Shape() {
+
+}

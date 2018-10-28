@@ -20,6 +20,8 @@ public:
     Color GetColor() {
         return color;
     }
+
+    void WhereAmI();
 };
 
 #endif //LAB1_SHAPE_H

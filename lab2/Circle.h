@@ -10,6 +10,8 @@ public:
     ~Circle();
 
     double GetSquare() const;
+
+    void WhereAmI();
 };
 
 #endif //LAB1_CIRCLE_H

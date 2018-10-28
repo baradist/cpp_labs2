@@ -13,6 +13,8 @@ public:
     ~Rect();
 
     double GetSquare() const;
+
+    void WhereAmI();
 };
 
 #endif //LAB1_RECT_H

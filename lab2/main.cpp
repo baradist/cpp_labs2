@@ -35,29 +35,52 @@ int main() {
 
     cout << "stop" << endl;
 //////////////////////////////////////////////////////////////////////
-/*
 	//Задание 2.Виртуальные функции.
 	//2а) Модифицируйте классы Shape,Rect и Circle:
 	//добавьте в каждый класс public метод void WhereAmI().
 	//Реализация каждой функции должна выводить сообщение 
 	//следующего вида "Now I am in class Shape(Rect или Circle)".
 	//Выполните приведенный фрагмент, объясните результат.
+    {
+        Shape s;
+        Rect r;
+        Circle c;
+        //Метод какого класса вызывается в следующих строчках???
+        s.WhereAmI();	//	Now I am in a class Shape
+        r.WhereAmI();	//	Now I am in a class Rect
+        c.WhereAmI();	//	Now I am in a class Circle
+        cout << "stop" << endl;
+
+        Shape* pShape = &s;
+        Shape* pRect = &r;
+        Shape* pCircle = &c;
+        pShape->WhereAmI();	//	Now I am in a class Shape
+        pRect->WhereAmI();	//	Now I am in a class Shape
+        pCircle->WhereAmI(); //	Now I am in a class Shape
+        cout << "stop" << endl;
+
+        //Заполните ... согласно комментариям
+        Shape& rShape = s; //псевдоним s
+        Shape& rRect = r; //псевдоним r
+        Shape& rCircle = c; //псевдоним c
+        s.WhereAmI();	//вызов посредством rShape	???: Now I am in a class Shape
+        r.WhereAmI();	//вызов посредством	rRect	???: Now I am in a class Rect
+        c.WhereAmI(); //вызов посредством rCircle	???: Now I am in a class Circle
+        cout << "stop" << endl;
+    }
 
 	//2б) Сделайте метод WhereAmI() виртуальным.
 	//Снова выполните приведенный фрагмент, объясните разницу.
 
 	{
-		Shape s(...);
-		Rect r(...);
-		Circle c(...);
-
-	
+		Shape s;
+		Rect r;
+		Circle c;
 		//Метод какого класса вызывается в следующих строчках???
 		s.WhereAmI();	//	???
 		r.WhereAmI();	//	???
 		c.WhereAmI();	//	???
 		cout << "stop" << endl;
-
 
 		Shape* pShape = &s;
 		Shape* pRect = &r;
@@ -67,17 +90,15 @@ int main() {
 		pCircle->WhereAmI(); //	???
 		cout << "stop" << endl;
 
-
 		//Заполните ... согласно комментариям
-		Shape& rShape = ...; //псевдоним s
-		Shape& rRect = ...; //псевдоним r
-		Shape& rCircle = ...; //псевдоним c
-    	...WhereAmI();	//вызов посредством rShape	???
-		...WhereAmI();	//вызов посредством	rRect	???
-		...WhereAmI(); //вызов посредством rCircle	???
+		Shape& rShape = s; //псевдоним s
+		Shape& rRect = r; //псевдоним r
+		Shape& rCircle = c; //псевдоним c
+    	s.WhereAmI();	//вызов посредством rShape	???
+		r.WhereAmI();	//вызов посредством	rRect	???
+		c.WhereAmI(); //вызов посредством rCircle	???
 		cout << "stop" << endl;
 	}
-*/
 
 //////////////////////////////////////////////////////////////////////
 /*

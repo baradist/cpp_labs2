@@ -21,7 +21,7 @@ public:
         return color;
     }
 
-    void WhereAmI();
+    virtual void WhereAmI();
 };
 
 #endif //LAB1_SHAPE_H

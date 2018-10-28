@@ -14,7 +14,7 @@ public:
 
     double GetSquare() const;
 
-    void WhereAmI();
+    virtual void WhereAmI();
 };
 
 #endif //LAB1_RECT_H

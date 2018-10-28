@@ -77,26 +77,26 @@ int main() {
 		Rect r;
 		Circle c;
 		//Метод какого класса вызывается в следующих строчках???
-		s.WhereAmI();	//	???
-		r.WhereAmI();	//	???
-		c.WhereAmI();	//	???
+		s.WhereAmI();	//	Now I am in a class Shape
+		r.WhereAmI();	//	Now I am in a class Rect
+		c.WhereAmI();	//	Now I am in a class Circle
 		cout << "stop" << endl;
 
 		Shape* pShape = &s;
 		Shape* pRect = &r;
 		Shape* pCircle = &c;
-    	pShape->WhereAmI();	//	???
-		pRect->WhereAmI();	//	???
-		pCircle->WhereAmI(); //	???
+    	pShape->WhereAmI();	//	Now I am in a class Shape
+		pRect->WhereAmI();	//	Now I am in a class Rect
+		pCircle->WhereAmI(); //	Now I am in a class Circle
 		cout << "stop" << endl;
 
 		//Заполните ... согласно комментариям
 		Shape& rShape = s; //псевдоним s
 		Shape& rRect = r; //псевдоним r
 		Shape& rCircle = c; //псевдоним c
-    	s.WhereAmI();	//вызов посредством rShape	???
-		r.WhereAmI();	//вызов посредством	rRect	???
-		c.WhereAmI(); //вызов посредством rCircle	???
+    	s.WhereAmI();	//вызов посредством rShape	???: Now I am in a class Shape
+		r.WhereAmI();	//вызов посредством	rRect	???: Now I am in a class Rect
+		c.WhereAmI(); //вызов посредством rCircle	???: Now I am in a class Circle
 		cout << "stop" << endl;
 	}
 

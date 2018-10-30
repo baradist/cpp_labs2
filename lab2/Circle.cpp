@@ -25,3 +25,7 @@ double Circle::GetSquare() const {
 void Circle::WhereAmI() {
     cout << "Now I am in a class Circle" << endl;
 }
+
+void Circle::Inflate(double i) {
+    size += i;
+}

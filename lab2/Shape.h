@@ -24,6 +24,8 @@ public:
     }
 
     virtual void WhereAmI();
+
+    void Inflate(double i) = 0;
 };
 
 #endif //LAB1_SHAPE_H

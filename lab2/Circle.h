@@ -16,6 +16,8 @@ public:
     double GetSquare() const;
 
     virtual void WhereAmI();
+
+    virtual void Inflate(double i);
 };
 
 #endif //LAB1_CIRCLE_H

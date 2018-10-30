@@ -21,3 +21,8 @@ double Rect::GetSquare() const {
 void Rect::WhereAmI() {
     cout << "Now I am in a class Rect" << endl;
 }
+
+void Rect::Inflate(double i) {
+    size += i;
+    sizeY += i;
+}

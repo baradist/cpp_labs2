@@ -69,7 +69,7 @@ MyString concatenateMyStrings(const char *fmt...) {
 
 ostream & operator<<(ostream & os, const MyString & str)
 {
-	os << "Бантики " << str.m_pStr << " Бантики";
+	os << "Bantiki " << str.m_pStr << " Bantiki";
 	return os;
 }
 
@@ -79,7 +79,7 @@ MyString & MyString::operator=(const MyString & that) {
 	}
 	if (strlen(m_pStr) < strlen(that.m_pStr))
 	{
-		delete[] m_pStr;
+		//delete[] m_pStr; // TODO ???
 		m_pStr = new char[strlen(that.m_pStr)];
 	}
 	strcpy(m_pStr, that.m_pStr);
@@ -89,7 +89,7 @@ MyString & MyString::operator=(const MyString & that) {
 MyString & MyString::operator=(const char* str) {
 	if (strlen(m_pStr) < strlen(str))
 	{
-		delete[] m_pStr;
+		//delete[] m_pStr; // TODO ???
 		m_pStr = new char[strlen(str)];
 	}
 	strcpy(m_pStr, str);
@@ -103,7 +103,7 @@ MyString & MyString::operator+=(const MyString & that)
 	m_pStr = new char[newSize];
 	strcpy(m_pStr, t);
 	strcat(m_pStr, that.m_pStr);
-	delete[] t;
+	//delete[] t; // TODO ???
 	return *this;
 }
 

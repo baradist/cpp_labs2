@@ -11,7 +11,7 @@ protected:
     Color color;
 
 public:
-    Shape(const Shape &that);
+	Shape(const Shape &that) = default;
 
     Shape(double x = 0, double y = 0, double size = 0, Color color = WHITE);
 

@@ -42,28 +42,28 @@ int main() {
     //следующего вида "Now I am in class Shape(Rect или Circle)".
     //Выполните приведенный фрагмент, объясните результат.
     {
-        Shape s;
+        //Shape s;
         Rect r;
         Circle c;
         //Метод какого класса вызывается в следующих строчках???
-        s.WhereAmI();    //	Now I am in a class Shape
+        //s.WhereAmI();    //	Now I am in a class Shape
         r.WhereAmI();    //	Now I am in a class Rect
         c.WhereAmI();    //	Now I am in a class Circle
         cout << "stop" << endl;
 
-        Shape *pShape = &s;
+		//Shape *pShape = &s;
         Shape *pRect = &r;
         Shape *pCircle = &c;
-        pShape->WhereAmI();    //	Now I am in a class Shape
+        //pShape->WhereAmI();    //	Now I am in a class Shape
         pRect->WhereAmI();    //	Now I am in a class Shape
         pCircle->WhereAmI(); //	Now I am in a class Shape
         cout << "stop" << endl;
 
         //Заполните ... согласно комментариям
-        Shape &rShape = s; //псевдоним s
+        //Shape &rShape = s; //псевдоним s
         Shape &rRect = r; //псевдоним r
         Shape &rCircle = c; //псевдоним c
-        s.WhereAmI();    //вызов посредством rShape	???: Now I am in a class Shape
+        //s.WhereAmI();    //вызов посредством rShape	???: Now I am in a class Shape
         r.WhereAmI();    //вызов посредством	rRect	???: Now I am in a class Rect
         c.WhereAmI(); //вызов посредством rCircle	???: Now I am in a class Circle
         cout << "stop" << endl;
@@ -73,28 +73,28 @@ int main() {
     //Снова выполните приведенный фрагмент, объясните разницу.
 
     {
-        Shape s;
+        //Shape s;
         Rect r;
         Circle c;
         //Метод какого класса вызывается в следующих строчках???
-        s.WhereAmI();    //	Now I am in a class Shape
+        //s.WhereAmI();    //	Now I am in a class Shape
         r.WhereAmI();    //	Now I am in a class Rect
         c.WhereAmI();    //	Now I am in a class Circle
         cout << "stop" << endl;
 
-        Shape *pShape = &s;
+        //Shape *pShape = &s;
         Shape *pRect = &r;
         Shape *pCircle = &c;
-        pShape->WhereAmI();    //	Now I am in a class Shape
+        //pShape->WhereAmI();    //	Now I am in a class Shape
         pRect->WhereAmI();    //	Now I am in a class Rect
         pCircle->WhereAmI(); //	Now I am in a class Circle
         cout << "stop" << endl;
 
         //Заполните ... согласно комментариям
-        Shape &rShape = s; //псевдоним s
+        //Shape &rShape = s; //псевдоним s
         Shape &rRect = r; //псевдоним r
         Shape &rCircle = c; //псевдоним c
-        s.WhereAmI();    //вызов посредством rShape	???: Now I am in a class Shape
+        //s.WhereAmI();    //вызов посредством rShape	???: Now I am in a class Shape
         r.WhereAmI();    //вызов посредством	rRect	???: Now I am in a class Rect
         c.WhereAmI(); //вызов посредством rCircle	???: Now I am in a class Circle
         cout << "stop" << endl;
@@ -111,7 +111,7 @@ int main() {
     // "Now I am in Rect's destructor!"
     //Выполните фрагмент. Объясните результат.
     {
-        Shape s; // Now I am in Circle's destructor!
+        //Shape s; // Now I am in Circle's destructor!
         //  Now I am in Shape's destructor!
         Rect r; // Now I am in Rect's destructor!
         //  Now I am in Shape's destructor!
@@ -122,7 +122,7 @@ int main() {
     // b) Добавьте в объявление деструкторов ключевое слово virtual
     //Выполните фрагмент.Объясните разницу.
     {
-        Shape s; // Now I am in Circle's destructor!
+        //Shape s; // Now I am in Circle's destructor!
         //  Now I am in Shape's destructor!
         Rect r; // Now I am in Rect's destructor!
         //  Now I am in Shape's destructor!
@@ -138,9 +138,9 @@ int main() {
     //не хватает - добавьте
     {
         Rect r(0, 0, 2, 3);
-        Shape *ar[] = {new Shape(r), new Rect(r), new Circle(r), new Circle()};
+        Shape *ar[] = {/*new Shape(r), */new Rect(r), new Circle(r), new Circle()};
         //Вызовите для каждого элемента массива метод WhereAmI()
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 3; ++i) {
             ar[i]->WhereAmI();
         }
 
@@ -178,7 +178,8 @@ int main() {
         //5a Оператор разрешения области видимости.
         //Посредством объекта r и указателя p вызовите виртуальную функцию
         //WhereAmI()класса Shape
-        static_cast<Shape>(*p).WhereAmI();
+
+        //static_cast<Shape>(*p).WhereAmI();
 
         cout << "stop" << endl;
     }

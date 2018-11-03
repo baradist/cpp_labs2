@@ -2,12 +2,18 @@
 #include <iostream>
 using namespace std;
 
-Rect::Rect(const Rect &that) {
-    Rect(that.x, that.y, that.size, that.sizeY, that.color);
+Rect::Rect(const Rect &that) : Shape(color) {
+	x = that.x;
+	y = that.y;
+	width = that.width;
+	heigth = that.heigth;
 }
 
-Rect::Rect(double x, double y, double width, double height, Color color) : Shape(x, y, width, color) {
-    this->sizeY = height;
+Rect::Rect(double x, double y, double width, double height, Color color) : Shape(color) {
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->heigth = height;
 }
 
 Rect::~Rect() {
@@ -15,7 +21,7 @@ Rect::~Rect() {
 }
 
 double Rect::GetSquare() const {
-    return size * sizeY;
+    return width * heigth;
 }
 
 void Rect::WhereAmI() {
@@ -23,6 +29,6 @@ void Rect::WhereAmI() {
 }
 
 void Rect::Inflate(double i) {
-    size += i;
-    sizeY += i;
+	width += i;
+	heigth += i;
 }

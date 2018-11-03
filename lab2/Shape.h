@@ -5,27 +5,17 @@
 
 class Shape {
 protected:
-    double x;
-    double y;
-    double size;
     Color color;
 
 public:
+	Shape() = default;
 	Shape(const Shape &that) = default;
-
-    Shape(double x = 0, double y = 0, double size = 0, Color color = WHITE);
-
-    virtual ~Shape();
-
-    double GetSquare() const;
-
-    Color GetColor() {
-        return color;
-    }
-
+	Shape(Color color);
+	virtual ~Shape();
+	virtual double GetSquare() const = 0;
+	virtual Color GetColor();
     virtual void WhereAmI();
-
-	virtual void Inflate(double i)/* = 0;*/ {}
+	virtual void Inflate(double i) = 0;
 };
 
 #endif //LAB1_SHAPE_H

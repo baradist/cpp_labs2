@@ -31,6 +31,7 @@ class Pair {
 	Data data; //данные о сотруднике
 			   //ѕодумайте, все ли перечисленные ниже методы надо реализовывать
 	Pair() = default;
+	Pair(const char *k);
 	Pair(const char *k, const Data& d);
 	~Pair() = default;
 	Pair(const Pair& other) = default;

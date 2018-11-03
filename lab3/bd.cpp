@@ -10,10 +10,18 @@ Base::Base()
 
 Base::~Base()
 {
+	delete [] pBase;
 }
 
 Base::Base(const Base & bd)
 {
+	capacity = bd.capacity;
+	count = bd.count;
+	pBase = new Pair[count];
+	for (size_t i = 0; i < count; i++)
+	{
+		pBase[i] = bd.pBase[i];
+	}
 }
 
 Base & Base::operator=(const Base & bd)
@@ -50,7 +58,7 @@ Base & Base::operator=(Base && bd)
 
 int Base::deletePair(const char * key)
 {
-	return 0;
+	return 0; // TODO
 }
 
 Data& Base::operator[](const char *key)
@@ -68,9 +76,8 @@ Data& Base::operator[](const char *key)
 		pBase = new Pair[capacity];	
 	}
 	//добавляем сотрудника
-	pBase[count] = Pair(key, Data());
-	count++;
-	return pBase[count].data;
+	pBase[count] = Pair(key);
+	return pBase[count++].data;
 }
 
 ostream & operator<<(ostream & os, const Base & bd)
@@ -92,7 +99,8 @@ ostream & operator<<(ostream & os, const Pair & pair)
 
 ostream & operator<<(ostream & os, const Data & d)
 {
-	os << d.gender << " " << d.age << " " << d.firstName; // TODO ???
+	// TODO: gender
+	os << (d.gender ? "Female" : "Male") << " " << d.age << " " << d.firstName;
 	return os;
 }
 
@@ -115,8 +123,13 @@ Data & Data::operator=(const Data & that)
 	gender = that.gender;
 	age = that.age;
 	salary = that.salary;
+	firstName = that.firstName;
 
 	return *this;
+}
+
+Pair::Pair(const char * k) : key(k)
+{
 }
 
 Pair::Pair(const char * k, const Data & d):key(k), data(d)

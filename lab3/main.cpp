@@ -108,6 +108,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		bd["Ivanov"] = Data(30,MALE, "vasily", 80000);	//если Ivanov-а в базе еще нет, то
 						//добавление, если уже есть, то замена его реквизитов
 		std::cout<<bd;	//вывод информации обо всех сотрудниках
+		std::cout << endl;
+		std::cout << bd["Ivanov"] << endl;
 		//А также:
 		Base bdnew = bd;
 		
@@ -115,9 +117,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//А также можно вспомнить про семантику перемещения...
 
-
-
-	
 	return 0;
 }//endmain
 

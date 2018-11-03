@@ -23,7 +23,7 @@ MyString::~MyString() {
     delete m_pStr;
 }
 
-char *MyString::GetString() const {
+const char *MyString::GetString() const {
     return m_pStr;
 }
 
@@ -33,7 +33,7 @@ void MyString::SetNewString(const char *pStr) {
 }
 
 void MyString::SetNewValue(const char *pStr) {
-    if (pStr == nullptr) {
+	if (pStr == nullptr) {
         m_pStr = new char[1];
         m_pStr[0] = 0;
     } else {

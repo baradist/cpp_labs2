@@ -205,8 +205,8 @@ int main() {
         // типа MyString. Например:
         //Как задать размерность? N=3
         //MyString arstr[N] = {...
-        size_t N = 3;
-        MyString arstr[N] = {MyString("First"), MyString("Second")};
+        size_t N = 2;
+        MyString arstr[] = {MyString("First"), MyString("Second")};
 
         //Проверка - печать строк-членов класса
         for (int i = 0; i < N; ++i) {
@@ -214,8 +214,8 @@ int main() {
         }
         cout << endl;
         //Увеличьте размер массива, не изменяя список инициализаторов:
-        N=5;
-        MyString arstr1[N] = {MyString("First"), MyString("Second")};
+        N=2;
+        MyString arstr1[] = {MyString("First"), MyString("Second")};
         for (int i = 0; i < N; ++i) {
             cout << arstr1[i].GetString();
         }
@@ -251,17 +251,19 @@ int main() {
     //Требуется определить номер итерации, на которой концентрация спирта в
     //первой бочке станет меньше 50%.
 
-    Bochka spirt(200, .96);
-    Bochka water(200, 0);
-
+    Bochka spirt(100, .96);
+    Bochka water(100, 0);
+	int counter = 0;
     while (spirt.GetConcentration() > .5) {
         spirt.Pereliv(water, 1); //или spirt.Pereliv(water, объем_кружки);
         water.Pereliv(spirt, 1); // аналогично
+		++counter;
     }
     cout << "The first barrel has " << spirt.GetVolume() << "l and a concentration of alcohol is "
          << spirt.GetConcentration() << endl;
     cout << "The second barrel has " << water.GetVolume() << "l and a concentration of alcohol is "
          << water.GetConcentration() << endl;
+	cout << "Iterations: " << counter;
 
     cout << "stop" << endl;
 }//end_main

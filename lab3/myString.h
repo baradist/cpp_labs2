@@ -22,7 +22,7 @@ public:
 
     ~MyString();
 
-    char *GetString() const;
+    const char *GetString() const;
 
     void SetNewString(const char *pStr);
 

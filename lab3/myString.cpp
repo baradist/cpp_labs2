@@ -6,11 +6,12 @@ using namespace std;
 
 // Определение конструктора.
 MyString::MyString() {
-    SetNewValue(nullptr);
+	m_pStr = new char[1] {0};
 }
 
-MyString::MyString(const MyString &myString) {
-    SetNewValue(myString.GetString());
+MyString::MyString(const MyString &that) {
+		m_pStr = new char[strlen(that.m_pStr)];
+		strcpy(m_pStr, that.m_pStr);
 }
 
 MyString::MyString(MyString &&myString) {
@@ -19,33 +20,34 @@ MyString::MyString(MyString &&myString) {
 }
 
 MyString::MyString(const char *pStr) {
-    SetNewValue(pStr);
+	if (pStr == nullptr) {
+		m_pStr = new char[1]{0};
+	}
+	else {
+		m_pStr = new char[strlen(pStr)];
+		strcpy(m_pStr, pStr);
+	}
 }
 
 // Определение деструктора.
 
 MyString::~MyString() {
-    delete m_pStr;
+    //delete[] m_pStr; // TODO: ??
 }
 
-char *MyString::GetString() const {
+const char *MyString::GetString() const {
     return m_pStr;
 }
 
 void MyString::SetNewString(const char *pStr) {
     delete m_pStr;
-    SetNewValue(pStr);
-}
-
-void MyString::SetNewValue(const char *pStr) {
-    if (pStr == nullptr) {
-        m_pStr = new char[1];
-        m_pStr[0] = 0;
-    } else {
-        int size = strlen(pStr) + 1;
-        m_pStr = new char[size];
-        strcpy(m_pStr, pStr);
-    }
+	if (pStr == nullptr) {
+		m_pStr = new char[1] {0};
+	}
+	else {
+		m_pStr = new char[strlen(pStr)];
+		strcpy(m_pStr, pStr);
+	}
 }
 
 MyString concatenateMyStrings(const char *fmt...) {

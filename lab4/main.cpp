@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Circle.h"
 #include "LIst.h"
 
@@ -18,5 +19,9 @@ int main() {
 	}
 	cout << endl;
 	cout << l << endl;
+
+	ofstream file("data.txt");
+	file << l << endl;
+
 	cout << "";
 }

@@ -10,5 +10,7 @@ public:
 	Circle();
 	Circle(const Point& point, double radius);
 	~Circle() = default;
+
+
 };
 

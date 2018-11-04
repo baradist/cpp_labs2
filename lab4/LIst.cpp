@@ -1,10 +1,23 @@
 #include "LIst.h"
 
 
-
-void List::unlink(Node & node)
+void List::unlink(Node * node)
 {
-	Node* prev = &node;
+	Node* prev = node->getPrev();
+	Node* next = node->getNext();
+
+	if (prev == nullptr) {
+		first = next;
+	} else {
+		prev->setNext(next);
+	}
+	if (next == nullptr) {
+		last = prev;
+	} else {
+		next->setPrev(prev);
+	}
+	delete node;
+	--size;
 }
 
 List::List()
@@ -51,6 +64,15 @@ void List::addLast(const Circle & c)
 
 bool List::remove(const Circle & c)
 {
+	Node* cur = first;
+	do {
+		if (*cur->getValue() == c) {
+			unlink(cur);
+			return true;
+		}
+		cur = cur->getNext();
+	} while (cur != nullptr);
+
 	return false;
 }
 
@@ -70,6 +92,9 @@ Node::Node(Node * prev, Node * next, const Circle * pc) : pPrev(prev), pNext(nex
 
 Node::~Node()
 {
+	pPrev = nullptr;
+	pNext = nullptr;
+	//delete *m_Data; // TODO???
 }
 
 void Node::setPrev(Node * prev)
@@ -84,12 +109,15 @@ void Node::setNext(Node * next)
 
 Node * Node::getPrev()
 {
-	// TODO: insert return statement here
-	return nullptr;
+	return pPrev;
 }
 
 Node * Node::getNext()
 {
-	// TODO: insert return statement here
-	return nullptr;
+	return pNext;
+}
+
+const Circle * Node::getValue()
+{
+	return &m_Data;
 }

@@ -20,6 +20,7 @@ public:
 	void setNext(Node* next);
 	Node* getPrev();
 	Node* getNext();
+	const Circle* getValue();
 }; 
 
 class List
@@ -27,7 +28,7 @@ class List
 	Node *first;
 	Node *last;
 	unsigned int size;
-	void unlink(Node& node);
+	void unlink(Node* node);
 public:
 	List();
 	~List();

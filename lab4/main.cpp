@@ -11,5 +11,6 @@ int main() {
 	List l;
 	l.addFirst(c);
 	l.addFirst(c1);
+	l.remove(c); // TODO: leaks?
 	cout << "";
 }

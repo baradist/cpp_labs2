@@ -7,7 +7,8 @@ class Point
 public:
 	Point();
 	Point(double x, double y);
-	//Point(const Point& that) = default;
-	//Point(Point&& that) = default;
+
+	friend bool operator==(const Point & p1, const Point & p2);
 };
 
+bool operator==(const Point& p1, const Point& p2);

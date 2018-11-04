@@ -27,8 +27,10 @@ class List
 {
 	Node *first;
 	Node *last;
-	unsigned int size;
+	unsigned int m_size;
 	void unlink(Node* node);
+
+	friend ostream& operator<<(ostream& os, const List& l);
 public:
 	List();
 	~List();
@@ -40,3 +42,5 @@ public:
 	Circle get(unsigned int i);
 	int size();
 };
+
+ostream& operator<<(ostream& os, const List& l);

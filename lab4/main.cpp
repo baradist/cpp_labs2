@@ -16,5 +16,7 @@ int main() {
 	{
 		cout << l.get(i) << endl;
 	}
+	cout << endl;
+	cout << l << endl;
 	cout << "";
 }

@@ -17,14 +17,14 @@ void List::unlink(Node * node)
 		next->setPrev(prev);
 	}
 	delete node;
-	--size;
+	--this->size;
 }
 
 List::List()
 {
 	first = nullptr;
 	last = nullptr;
-	size = 0;
+	this->size = 0;
 }
 
 
@@ -45,7 +45,7 @@ void List::addFirst(const Circle & c)
 	} else {
 		f->setPrev(newNode);
 	}
-	size++;
+	++this->size;
 }
 
 void List::addLast(const Circle & c)
@@ -59,7 +59,7 @@ void List::addLast(const Circle & c)
 	} else {
 		l->setNext(newNode);
 	}
-	size++;
+	++this->size;
 }
 
 bool List::remove(const Circle & c)
@@ -74,6 +74,40 @@ bool List::remove(const Circle & c)
 	} while (cur != nullptr);
 
 	return false;
+}
+
+int List::removeAll(const Circle & c)
+{
+	size_t count = 0;
+	Node* cur = first;
+	do {
+		if (*cur->getValue() == c) {
+			unlink(cur);
+			++count;
+		}
+		cur = cur->getNext();
+	} while (cur != nullptr);
+
+	return count;
+}
+
+Circle List::get(unsigned int index)
+{
+	if (index < 0 || index >= this->size)
+	{
+		return Circle(); // TODO: throw an exception
+	}
+	Node* cur = first;
+	for (size_t i = 0; i < index; i++)
+	{
+		cur = cur->getNext();
+	}
+	return Circle(*cur->getValue());
+}
+
+int List::size()
+{
+	return this->size;
 }
 
 Node::Node()

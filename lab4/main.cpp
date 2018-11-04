@@ -11,6 +11,10 @@ int main() {
 	List l;
 	l.addFirst(c);
 	l.addFirst(c1);
-	l.remove(c); // TODO: leaks?
+	//l.remove(c); // TODO: leaks?
+	for (size_t i = 0; i < 2; i++)
+	{
+		cout << l.get(i) << endl;
+	}
 	cout << "";
 }

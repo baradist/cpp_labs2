@@ -16,3 +16,8 @@ bool operator==(const Circle & c1, const Circle & c2)
 {
 	return &c1 == &c2 || (c1.point == c2.point && c1.radius == c2.radius);
 }
+
+ostream & operator<<(ostream & os, const Circle & c)
+{
+	return os << "Circle: { " << c.point << ", Radius=" << c.radius << " }";
+}

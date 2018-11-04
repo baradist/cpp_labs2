@@ -36,4 +36,7 @@ public:
 	void addFirst(const Circle& c);
 	void addLast(const Circle& c);
 	bool remove(const Circle& c);
+	int removeAll(const Circle& c);
+	Circle get(unsigned int i);
+	int size();
 };

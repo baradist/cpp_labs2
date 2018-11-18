@@ -16,22 +16,17 @@ void List::unlink(Node * node)
 	} else {
 		next->setPrev(prev);
 	}
-	delete node;
+	
 	--this->m_size;
 }
 
-List::List()
-{
-	first = nullptr;
-	last = nullptr;
-	this->m_size = 0;
-}
+List::List() : first(nullptr), last(nullptr), m_size(0)
+{}
 
 
 List::~List()
 {
-	delete first;
-	delete last;
+	clear();
 }
 
 void List::addFirst(const Circle & c)
@@ -81,11 +76,19 @@ int List::removeAll(const Circle & c)
 	size_t count = 0;
 	Node* cur = first;
 	do {
+		Node* next = cur->getNext();
 		if (*cur->getValue() == c) {
 			unlink(cur);
 			++count;
+
+			
+			delete cur;
+			
 		}
-		cur = cur->getNext();
+		
+			cur = next;
+		
+		
 	} while (cur != nullptr);
 
 	return count;
@@ -93,65 +96,129 @@ int List::removeAll(const Circle & c)
 
 Circle List::get(unsigned int index)
 {
-	if (index < 0 || index >= this->m_size)
-	{
-		return Circle(); // TODO: throw an exception
-	}
+	return Circle(operator[](index));
+}
+
+Circle & List::operator[](int index)
+{
+	//if (index < 0 || index >= this->m_size)
+	//{
+	//	return Circle(); // TODO: throw an exception
+	//}
 	Node* cur = first;
 	for (size_t i = 0; i < index; i++)
 	{
 		cur = cur->getNext();
 	}
-	return Circle(*cur->getValue());
+	return *(cur->getValue());
 }
 
-int List::size()
+int List::size() const
 {
 	return this->m_size;
+}
+
+void List::clear()
+{
+	Node* cur = first;
+	Node* next;
+	while (cur != nullptr) {
+		next = cur->getNext();
+		delete cur;
+		cur = next;
+	}
+	first = nullptr;
+	last = nullptr;
+}
+
+void List::merge(const List & that)
+{
+	Node* curThis = first;
+	Node* curThat = that.first;
+
+	Node* curFirst = new Node();
+	Node* cur = curFirst;
+	while (!(curThis == nullptr && curThat == nullptr)) {
+		if (curThis == nullptr) {
+			cur->setNext(curThat);
+			curThat->setPrev(cur);
+			curThat = curThat->getNext();
+		}
+		else if (curThat == nullptr) {
+			cur->setNext(curThis);
+			curThis->setPrev(cur);
+			curThis = curThis->getNext();
+		}
+		else if (*curThis->getValue() < *curThat->getValue()) {
+			cur->setNext(curThis);
+			curThis->setPrev(cur);
+			curThis = curThis->getNext();
+		}
+		else {
+			cur->setNext(curThat);
+			curThat->setPrev(cur);
+			curThat = curThat->getNext();
+		}
+		cur = cur->getNext();
+	}
+	
+	first = curFirst->getNext();
+	delete curFirst;
+	first->setPrev(nullptr);
+	last = cur;
+	m_size += that.m_size;
+}
+
+void List::sort()
+{
+	if (m_size == 1)
+	{
+		return;
+	}
+	Node* mid = first;
+	size_t newSize = m_size / 2;
+	for (size_t i = 0; i < newSize; i++) {
+		mid = mid->getNext();
+	}
+
+	List secondHalf;
+	secondHalf.last = last;
+
+	secondHalf.first = mid;
+	last = mid->getPrev();
+	
+	secondHalf.first->setPrev(nullptr);
+	last->setNext(nullptr);
+
+	secondHalf.m_size = m_size - newSize;
+	m_size = newSize;
+
+	sort();
+	secondHalf.sort();
+	merge(secondHalf);
+	secondHalf.first = nullptr;
+	secondHalf.last = nullptr;
 }
 
 Node::Node()
 {
 }
 
-Node::Node(const Circle * pc)
+Node::Node(const Circle * pc) : m_Data(*pc)
 {
-	m_Data = *pc;
 }
 
-Node::Node(Node * prev, Node * next, const Circle * pc) : pPrev(prev), pNext(next)
-{
-	m_Data = *pc;
+Node::Node(Node * prev, Node * next, const Circle * pc) : pPrev(prev), pNext(next), m_Data(*pc)
+{	
 }
 
 Node::~Node()
 {
 	pPrev = nullptr;
 	pNext = nullptr;
-	//delete *m_Data; // TODO???
 }
 
-void Node::setPrev(Node * prev)
-{
-	pPrev = prev;
-}
-
-void Node::setNext(Node * next)
-{
-	pNext = next;
-}
-
-Node * Node::getPrev()
-{
-	return pPrev;
-}
-
-Node * Node::getNext()
-{
-	return pNext;
-}
-
-const Circle * Node::getValue()
+Circle * Node::getValue()
 {
 	return &m_Data;
 }
@@ -160,10 +227,10 @@ ostream & operator<<(ostream & os, const List & l)
 {
 	Node* cur = l.first;
 	os << "[ " << endl;
-	do {
+	while (cur != nullptr) {
 		os << *cur->getValue() << "," << endl;
 		cur = cur->getNext();
-	} while (cur != nullptr);
+	};
 	os << "]";
 	return os;
 }

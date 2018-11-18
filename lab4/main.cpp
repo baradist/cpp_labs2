@@ -18,10 +18,30 @@ int main() {
 		cout << l.get(i) << endl;
 	}
 	cout << endl;
+	for (size_t i = 0; i < 2; i++)
+	{
+		cout << l[i] << endl;
+	}
+	cout << endl;
 	cout << l << endl;
 
 	ofstream file("data.txt");
 	file << l << endl;
 
+	cout << "";
+
+	l.addLast(Circle(p, 44));
+	l.addLast(Circle(p, 35));
+	l.addLast(Circle(p, 30));
+	l.addLast(Circle(p, 25));
+	l.addLast(Circle(p, 20));
+	l.addLast(Circle(p, 15));
+	l.addLast(Circle(p, -1));
+	cout << l;
+	l.sort();
+	cout << l;
+	l.clear();
+	l.clear();
+	cout << l;
 	cout << "";
 }

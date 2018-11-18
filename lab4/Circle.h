@@ -15,6 +15,8 @@ public:
 	Circle(const Point& point, double radius);
 	~Circle() = default;
 
+	bool operator<(const Circle & that);
+
 	friend bool operator==(const Circle & c1, const Circle & c2);
 
 	friend ostream& operator<<(ostream& os, const Circle& c);

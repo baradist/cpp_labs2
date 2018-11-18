@@ -12,6 +12,11 @@ Circle::Circle(const Point & point, double radius)
 	this->radius = radius;
 }
 
+bool Circle::operator<(const Circle & that)
+{
+	return radius < that.radius;
+}
+
 bool operator==(const Circle & c1, const Circle & c2)
 {
 	return &c1 == &c2 || (c1.point == c2.point && c1.radius == c2.radius);

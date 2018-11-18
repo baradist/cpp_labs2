@@ -31,26 +31,24 @@ Point & Point::operator+=(const int i)
 	return *this;
 }
 
-Point Point::operator-(const int i)
+Point Point::operator-(const int i) const
 {
 	return Point(this->x - i, this->y - i);
 }
 
-Point Point::operator-(const Point & that)
+Point Point::operator-(const Point & that) const
 {
 	return Point(this->x - that.x, this->y - that.y);
 }
 
-Point Point::operator+()
+const Point& Point::operator+() const
 {
 	return *this;
 }
 
 Point Point::operator-()
 {
-	this->x = -this->x;
-	this->y = -this->y;
-	return *this;
+	return Point(-this->x, -this->y);
 }
 
 Point operator+(const Point & p1, const Point & p2)

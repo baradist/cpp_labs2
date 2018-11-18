@@ -114,7 +114,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		Base bdnew = bd;
 		
 		bdnew = bd;
-
+		bdnew.deletePair("Ivanov");
+		std::cout << bdnew << std::endl;
 		//А также можно вспомнить про семантику перемещения...
 
 	return 0;

@@ -21,15 +21,15 @@ public:
 
 	~Data() = default;
 
-	Data & operator=(const Data & that);
+	Data & operator=(const Data & that) = default;
 
 	friend ostream & operator<<(ostream & os, const Data & d);
 };
 
 class Pair {
-	MyString key; //êëþ÷ - ôàìèëèÿ
-	Data data; //äàííûå î ñîòðóäíèêå
-			   //Ïîäóìàéòå, âñå ëè ïåðå÷èñëåííûå íèæå ìåòîäû íàäî ðåàëèçîâûâàòü
+	MyString key; //ÐºÐ»ÑŽÑ‡ - Ñ„Ð°Ð¼Ð¸Ð»Ð¸Ñ
+	Data data; //Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¾ ÑÐ¾Ñ‚Ñ€ÑƒÐ´Ð½Ð¸ÐºÐµ
+			   //ÐŸÐ¾Ð´ÑƒÐ¼Ð°Ð¹Ñ‚Ðµ, Ð²ÑÐµ Ð»Ð¸ Ð¿ÐµÑ€ÐµÑ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ðµ Ð½Ð¸Ð¶Ðµ Ð¼ÐµÑ‚Ð¾Ð´Ñ‹ Ð½Ð°Ð´Ð¾ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ñ‹Ð²Ð°Ñ‚ÑŒ
 	Pair() = default;
 	Pair(const char *k);
 	Pair(const char *k, const Data& d);
@@ -43,26 +43,26 @@ class Pair {
 	friend ostream& operator<<(ostream& os, const Pair& pair);
 
 	friend ostream & operator<<(ostream & os, const Pair & pair);
-	//èëè êàêèõ-ëèáî ìåòîäîâ íå õâàòàåò
+	//Ð¸Ð»Ð¸ ÐºÐ°ÐºÐ¸Ñ…-Ð»Ð¸Ð±Ð¾ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð² Ð½Ðµ Ñ…Ð²Ð°Ñ‚Ð°ÐµÑ‚
 };
 
 class Base
 {
-	Pair *pBase; // Pair **pBase; //óêàçàòåëü íà áàçó äàííûõ
-	size_t count; //êîëè÷åñòâî ýëåìåíòîâ â áàçå
-	size_t capacity; //åìêîñòü áàçû
+	Pair *pBase; // Pair **pBase; //ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð½Ñ‹Ñ…
+	size_t count; //ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð² Ð±Ð°Ð·Ðµ
+	size_t capacity; //ÐµÐ¼ÐºÐ¾ÑÑ‚ÑŒ Ð±Ð°Ð·Ñ‹
 
 public:
 	Base();
 	virtual ~Base();
 
 	Base(const Base& bd);
-	Base& operator=(const Base& bd); //îïòèìèçèðîâàííûé!!!
 	Base(Base&& bd);
-	Base& operator=(Base&& bd);
-
+	
 	int deletePair(const char* key);
 
+	Base& operator=(const Base& bd); //Ð¾Ð¿Ñ‚Ð¸Ð¼Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹!!!
+	Base& operator=(Base&& bd);
 	Data& operator[](const char *key);
 
 	friend ostream& operator<<(ostream& os, const Base& bd);

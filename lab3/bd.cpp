@@ -26,68 +26,86 @@ Base::Base(const Base & bd)
 
 Base & Base::operator=(const Base & bd)
 {
-	// TODO: оптимизированный?
-
-	capacity = bd.capacity;
-	count = bd.count;
 	if (capacity < bd.count)
 	{
+		capacity = bd.count;
 		delete[] pBase;
 		pBase = new Pair[capacity];
 	}
-	memcpy(pBase, bd.pBase, bd.count);
+	
+	count = bd.count;
+	for (size_t i = 0; i < bd.count; i++) // memcpy - removed
+	{
+		pBase[i] = bd.pBase[i];
+	}
 	return *this;
 }
 
 Base::Base(Base && bd)
 {
+	capacity = bd.capacity;
+	count = bd.count;
+	pBase = bd.pBase;
+	bd.pBase = nullptr;
 }
 
 Base & Base::operator=(Base && bd)
 {
-	capacity = bd.capacity;
+	capacity = bd.count;
 	count = bd.count;
-	if (capacity < bd.count)
-	{
-		delete[] pBase;
-		pBase = new Pair[capacity];
-	}
-	memcpy(pBase, bd.pBase, bd.count);
+	pBase = bd.pBase;
+	bd.pBase = nullptr;
 	return *this;
 }
 
 int Base::deletePair(const char * key)
 {
-	return 0; // TODO
+	for (size_t i = 0; i < count; i++) {
+		if (pBase[i] == key) // if(*pBase[i] == key)
+		{
+			for (size_t j = i; j < count - 1; j++) {
+				pBase[j] = pBase[j + 1];
+			}
+			--count;
+			return 1;
+		}
+	}
+	return 0;
 }
 
 Data& Base::operator[](const char *key)
 {
-	//ищем сотрудника в базе
+	//РёС‰РµРј СЃРѕС‚СЂСѓРґРЅРёРєР° РІ Р±Р°Р·Рµ
 	for (size_t i = 0; i < count; i++) {
 		if (pBase[i] == key) // if(*pBase[i] == key)
 			return pBase[i].data;
 	}
-	//если сотрудник не найден, добавляем (всегда!!!)
+	//РµСЃР»Рё СЃРѕС‚СЂСѓРґРЅРёРє РЅРµ РЅР°Р№РґРµРЅ, РґРѕР±Р°РІР»СЏРµРј (РІСЃРµРіРґР°!!!)
 	if(count >= capacity) {
-		//перераспределяем память
-		delete[] pBase;
+		//РїРµСЂРµСЂР°СЃРїСЂРµРґРµР»СЏРµРј РїР°РјСЏС‚СЊ
+		
 		capacity *= 2;
-		pBase = new Pair[capacity];	
+		Pair* pNewBase = new Pair[capacity];
+		for (size_t i = 0; i < count; i++)
+		{
+			pNewBase[i] = pBase[i];
+		}
+		delete[] pBase;
+		pBase = pNewBase;
 	}
-	//добавляем сотрудника
+	//РґРѕР±Р°РІР»СЏРµРј СЃРѕС‚СЂСѓРґРЅРёРєР°
 	pBase[count] = Pair(key);
 	return pBase[count++].data;
 }
 
 ostream & operator<<(ostream & os, const Base & bd)
 {
-	os << "Бантики ";
+	os << "Р‘Р°РЅС‚РёРєРё ";
 	for (size_t i = 0; i < bd.count; i++)
 	{
 		os << bd.pBase[i];
 	}
-	os << " Бантики" << endl;
+	os << " Р‘Р°РЅС‚РёРєРё" << endl;
 	return os;
 }
 
@@ -108,25 +126,25 @@ Data::Data()
 {
 }
 
-Data::Data(int age, Gender, const char* firstName, int salary)
+Data::Data(int age, Gender, const char* firstName, int salary): firstName(firstName)
 {
 	this->age = age;
-	this->firstName = MyString(firstName);
+	//this->firstName = MyString(firstName);
 	this->salary = salary;
 }
 
-Data & Data::operator=(const Data & that)
-{
-	if (this == &that) {
-		return *this;
-	}
-	gender = that.gender;
-	age = that.age;
-	salary = that.salary;
-	firstName = that.firstName;
-
-	return *this;
-}
+//Data & Data::operator=(const Data & that)
+//{
+//	if (this == &that) {
+//		return *this;
+//	}
+//	gender = that.gender;
+//	age = that.age;
+//	salary = that.salary;
+//	firstName = that.firstName;
+//
+//	return *this;
+//}
 
 Pair::Pair(const char * k) : key(k)
 {

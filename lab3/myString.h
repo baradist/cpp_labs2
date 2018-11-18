@@ -8,33 +8,21 @@ using namespace std;
 class MyString {
     char *m_pStr;    //строка-член класса
 
-    void SetNewValue(const char *pStr);
-
 public:
-
-    MyString();
-
+	MyString();
     MyString(const MyString &myString);
-
 	MyString(MyString &&myString);
-
     MyString(const char *pStr);
-
     ~MyString();
-
     const char *GetString() const;
-
     void SetNewString(const char *pStr);
-
 	MyString& operator=(const MyString & that);
-
+	MyString& operator=(MyString && that);
 	MyString& operator=(const char* str);
+	MyString& operator+=(const MyString& that);
+	MyString operator+(const MyString& that);
 
 	friend ostream& operator<<(ostream& os, const MyString& string);
-
-	MyString & operator+=(const MyString& that);
-
-	MyString operator+(const MyString& that);
 };
 
 MyString concatenateMyStrings(const char *fmt...);

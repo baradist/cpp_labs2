@@ -21,11 +21,11 @@ public:
 
 	Point & operator+=(const int i);
 
-	Point operator-(const int i);
+	Point operator-(const int i) const;
 
-	Point operator-(const Point& that);
+	Point operator-(const Point& that) const;
 
-	Point operator+();
+	const Point& operator+() const;
 
 	Point operator-();
 };

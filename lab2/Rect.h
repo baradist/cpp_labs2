@@ -10,6 +10,7 @@ protected:
 	double width;
     double heigth;
 
+	friend class Circle;
 public:
     Rect(const Rect &that);
     Rect(double x = 0, double y = 0, double width = 0, double height = 0, Color color = WHITE);

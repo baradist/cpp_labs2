@@ -8,12 +8,12 @@ protected:
     Color color;
 
 public:
-	Shape() = default;
+	Shape();
 	Shape(const Shape &that) = default;
 	Shape(Color color);
 	virtual ~Shape();
 	virtual double GetSquare() const = 0;
-	virtual Color GetColor();
+	Color GetColor() const;
     virtual void WhereAmI();
 	virtual void Inflate(double i) = 0;
 };

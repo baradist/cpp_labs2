@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Rect.h"
 #include "Circle.h"
+#include "MyByte.h"
 
 using namespace std;
 
@@ -142,6 +143,7 @@ int main() {
         //Вызовите для каждого элемента массива метод WhereAmI()
         for (int i = 0; i < 3; ++i) {
             ar[i]->WhereAmI();
+			delete ar[i];
         }
 
         cout << "stop" << endl;
@@ -150,13 +152,13 @@ int main() {
     //Задание 4*. В чем заключается отличие 1) и 2)
     {
         cout << "Task 4" << endl;
-        Rect *pShapes = new Rect[10];//1) // Shape* -> Rect*
+        Shape *pShapes = new Rect[10];//1) // Shape* -> Rect*
         Rect *pRects = new Rect[10];//2)
 
         //Попробуйте вызвать метод WhereAmI() для каждого элемента обоих массивов -
         //в чем заключается проблема???
         for (int i = 0; i < 10; ++i) {
-            pShapes[i].WhereAmI();
+            pShapes[i].Shape::WhereAmI();
             pRects[i].WhereAmI();
         }
         //Освободите динамически захваченную память
@@ -180,6 +182,7 @@ int main() {
         //WhereAmI()класса Shape
 
         //static_cast<Shape>(*p).WhereAmI();
+		p->Shape::WhereAmI();
 
         cout << "stop" << endl;
     }
@@ -199,7 +202,7 @@ int main() {
     }
 
 //////////////////////////////////////////////////////////////////////
-/*
+
 	//Задание 7.Объединения (union) C++. Битовые поля.
 	//1.
 	//Создайте следующие классы для различных представлений значений байта:
@@ -221,13 +224,13 @@ int main() {
 	//			восьмеричные, двоичные цифры;
 	//в) изменять отдельные двоичные, восьмеричные или шестнадцатеричные цифры;
 
-	MyByte byte(0x1f);
+	MyByte byte(0xff);
 	byte.ShowHex();
+	byte.ShowOct();
 	byte.ShowBin();
-	//...
 
 
-*/
+
 
 
 

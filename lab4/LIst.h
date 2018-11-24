@@ -4,8 +4,6 @@
 
 class Node
 {
-	//friend class List; // TODO: doesn't work?
-
 	Node* pPrev;
 	Node* pNext;
 	Circle m_Data;
@@ -20,8 +18,8 @@ public:
 	void inline setNext(Node* next)	{ pNext = next; };
 	inline Node* getPrev() {return pPrev;};
 	inline Node* getNext() { return pNext; };
-	inline Circle* getValue();
-
+	inline Circle* getValue() { return &m_Data; };
+	inline void setValue(Circle circle) { m_Data = circle; };
 }; 
 
 class List
@@ -36,6 +34,8 @@ class List
 	
 public:
 	List();
+	List(const List& that);
+	List(List&& that);
 	~List();
 
 	void sort();
@@ -48,7 +48,9 @@ public:
 	Circle & operator[](int i);
 	int size() const;
 	void clear();
+	void clearAfter(Node* cur);
 
+	List& operator=(const List& that);
 };
 
 ostream& operator<<(ostream& os, const List& l);

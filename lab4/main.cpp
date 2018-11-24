@@ -28,7 +28,7 @@ int main() {
 	ofstream file("data.txt");
 	file << l << endl;
 
-	cout << "";
+	cout << "" << endl;
 
 	l.addLast(Circle(p, 44));
 	l.addLast(Circle(p, 35));
@@ -37,11 +37,22 @@ int main() {
 	l.addLast(Circle(p, 20));
 	l.addLast(Circle(p, 15));
 	l.addLast(Circle(p, -1));
-	cout << l;
-	l.sort();
-	cout << l;
+	cout << "Before sorting" << endl << l << endl;
+
+    l.sort();
+    cout << "Before sorting" << endl << l << endl;
+
+	List l2;
+	l2.addLast(Circle(p, 50));
+	l2.addLast(Circle(p, 51));
+	l = l2;
+	cout << l2 << endl;
+
+	List l3(l);
+	cout << l3 << endl;
+
 	l.clear();
 	l.clear();
-	cout << l;
+	cout << l << endl;
 	cout << "";
 }

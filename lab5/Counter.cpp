@@ -19,6 +19,7 @@ Counter::~Counter() {
     --m_curCounters;
 
     if (!m_curCounters) {
+        Head = nullptr;
         return;
     }
     if (Head == this) {

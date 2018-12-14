@@ -20,6 +20,8 @@ public:
 
     bool operator==(const Point &that) const;
 
+    bool operator<(const Point &that) const;
+
     friend std::ostream &operator<<(std::ostream &os, const Point &p);
 
     inline int getX() const { return m_x; };

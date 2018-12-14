@@ -29,7 +29,7 @@ void removeDuplicates(std::vector<T> &v) {
 }
 
 void insertFirstIfDoesntContain(std::vector<char> &v, char c) {
-    std::vector<char>::iterator itb = v.begin();
+    auto itb = v.begin();
     for (; itb != v.end(); ++itb) {
         if (*itb == c) {
             return;
@@ -38,5 +38,13 @@ void insertFirstIfDoesntContain(std::vector<char> &v, char c) {
     v.insert(v.begin(), c);
 }
 
+template<typename T>
+inline void printContainer(const T &cont) {
+    std::cout << "Container is a : " << typeid(cont).name() << std::endl;
+    for (typename T::const_iterator itb = cont.begin(); itb != cont.end(); ++itb) {
+        std::cout << *itb << std::endl;
+    }
+    std::cout << std::endl;
+}
 
 #endif //LAB8_FUNCTIONS_H

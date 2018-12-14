@@ -8,15 +8,17 @@ class Point {
     int m_x, m_y;
 
 public:
-    Point(int x = 0, int y = 0);
+    static bool anyCoordIsNegative(const Point &p);
 
-    Point(const Point &that);
+    explicit Point(int x = 0, int y = 0);
 
-    Point(Point &&that);
+    Point(const Point &that) = default;
 
-    ~Point();
+    Point(Point &&that) noexcept = default;
 
-    Point &operator=(const Point &that);
+    ~Point() = default;
+
+    Point &operator=(const Point &that) = default;
 
     bool operator==(const Point &that) const;
 

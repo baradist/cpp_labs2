@@ -6,6 +6,7 @@
 #include <vector>
 #include <cstring>
 #include <list>
+#include <deque>
 #include "myString.h"
 #include "Point.h"
 #include "Functions.h"
@@ -67,8 +68,8 @@ int main() {
         vector<MyString> vMystring(5, MyString("A"));
         vMystring.at(1) = "B"; //ok
         vMystring[3] = "C"; //ok
-//    vMystring.at(5) = "D"; // out_of_range
-//	vMystring[7] = "E";  // Process finished with exit code 139 (interrupted by signal 11: SIGSEGV)
+//        vMystring.at(5) = "D"; // out_of_range
+//        vMystring[7] = "E";  // Process finished with exit code 139 (interrupted by signal 11: SIGSEGV)
         printVectorParameters(std::cout, vMystring);
 
         //вектор вещественных - vDouble3, который является копией элементов
@@ -265,72 +266,92 @@ int main() {
         //его значениями с помощью методов push_back(),
         //push_front, insert()
         list<Point> ptList1;
-        ptList1.push_back(Point(1, 2));
+        ptList1.push_back(Point(1, -2));
         ptList1.push_front(Point(3, 4));
         ptList1.insert(++ptList1.begin(), Point());
 
         //Напишите шаблон функции, которая будет выводить элементы
         //ЛЮБОГО КОНТЕЙНЕРА на печать. Проверьте работу шаблона на контейнерах
         //vector и list. Подсказка - хотелось бы увидеть тип контейнера.
-
+        printContainer(ptList1);
+        vector<Point> ptVector(ptList1.begin(), ptList1.end());
+        printContainer(ptVector);
 
         //Сделайте любой из списков "реверсивным" - reverse()
-
+        ptList1.reverse();
+        printContainer(ptList1);
 
         //Создайте список ptList2 из элементов Point таким образом, чтобы он стал
         //копией вектора элементов типа Point, но значения элементов списка располагались
         //бы в обратном порядке
-
-
+        list<Point> ptList2(ptVector.rbegin(), ptVector.rend());
+        printContainer(ptList1);
 
         //Отсортируйте списки  ptList1 и ptList2 - методом класса list - sort()
         //по возрастанию.
         //Подумайте: что должно быть перегружено в классе Point для того, чтобы
         //работала сортировка
+        ptList1.sort();
+        printContainer(ptList1);
+        ptList2.sort();
+        printContainer(ptList2);
 
         std::cout << std::endl;
-    }
 
+        //Объедините отсортированные списки - merge(). Посмотрите: что
+        //при этом происходит с каждым списком.
+        ptList1.merge(ptList2);
+        printContainer(ptList1);
 
+        std::cout << std::endl;
 
+        //Исключение элемента из списка - remove()
+        //Исключите из списка элемент с определенным значением.
+        //Подумайте: что должно быть перегружено в классе Point?
+        ptList1.remove(Point(3, 4));
+        printContainer(ptList1);
 
-    //Объедините отсортированные списки - merge(). Посмотрите: что
-    //при этом происходит с каждым списком.
+        //Исключение элемента из списка, удовлетворяющего заданному условию:
+        //любая из координат отрицательна - remove_if().
+        ptList1.remove_if(Point::anyCoordIsNegative);
+        printContainer(ptList1);
 
+        //Исключение из списка подряд расположенных дублей - unique().
 
-    std::cout << std::endl;
-
-    //Исключение элемента из списка - remove()
-    //Исключите из списка элемент с определенным значением.
-    //Подумайте: что должно быть перегружено в классе Point?
-
-
-    //Исключение элемента из списка, удовлетворяющего заданному условию:
-    //любая из координат отрицательна - remove_if().
-
-
-    //Исключение из списка подряд расположенных дублей - unique().
-
-    std::cout << std::endl;
+        std::cout << std::endl;
 
 ///////////////////////////////////////////////////////////////////
-    //Задание 2.Очередь с двумя концами - контейнер deque
+        //Задание 2.Очередь с двумя концами - контейнер deque
 
-    //Создайте пустой deque с элементами типа Point. С помощью
-    //assign заполните deque копиями элементов вектора. С помощью
-    //разработанного Вами в предыдущем задании универсального шаблона
-    //выведите значения элементов на печать
+        //Создайте пустой deque с элементами типа Point. С помощью
+        //assign заполните deque копиями элементов вектора. С помощью
+        //разработанного Вами в предыдущем задании универсального шаблона
+        //выведите значения элементов на печать
+        deque<Point> ptDeque;
+        ptDeque.assign(ptVector.begin(), ptVector.end());
+        printContainer(ptDeque);
 
+        //Создайте deque с элементами типа MyString. Заполните его значениями
+        //с помощью push_back(), push_front(), insert()
+        //С помощью erase удалите из deque все элементы, в которых строчки
+        //начинаются с 'A' или 'a'
+        deque<MyString> dequeStr;
+        dequeStr.push_back("one");
+        dequeStr.push_front("two");
+        dequeStr.insert(++dequeStr.begin(), "three");
+        dequeStr.push_front("aaa");
+        dequeStr.push_front("Abcd");
+        printContainer(dequeStr);
 
-
-    //Создайте deque с элементами типа MyString. Заполните его значениями
-    //с помощью push_back(), push_front(), insert()
-    //С помощью erase удалите из deque все элементы, в которых строчки
-    //начинаются с 'A' или 'a'
-
-
-
-
+        for (auto it = dequeStr.begin(); it != dequeStr.end();) {
+            if (it->startsWith('a')) {
+                it = dequeStr.erase(it);
+            } else {
+                ++it;
+            }
+        }
+        printContainer(dequeStr);
+    }
     return 0;
 }
 

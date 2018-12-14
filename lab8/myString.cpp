@@ -42,7 +42,6 @@ MyString::MyString(MyString &&that) : m_pMyCounter(that.m_pMyCounter) {
 MyString::MyString(const char *str) : m_pMyCounter(Counter::find(str)) {
 }
 
-
 MyString::~MyString() {
     if (m_pMyCounter) {
         m_pMyCounter->removeUser();
@@ -81,4 +80,11 @@ std::ostream &operator<<(std::ostream &os, const MyString &myString) {
 
 void MyString::sort() {
     Counter::Head = Counter::sort(Counter::Head, Counter::m_curCounters);
+}
+
+bool MyString::startsWith(const char c) const {
+    if (m_pMyCounter == nullptr) {
+        return false;
+    }
+    return toupper(c) == toupper(m_pMyCounter->m_pStr[0]);
 }

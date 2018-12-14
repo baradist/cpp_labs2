@@ -32,4 +32,6 @@ public:
     MyString &operator=(MyString &&that);
 
     MyString &operator=(const MyString &that);
+
+    bool startsWith(const char c) const;
 };

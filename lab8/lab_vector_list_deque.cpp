@@ -5,30 +5,15 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <list>
 #include "myString.h"
 #include "Point.h"
-
-
-void insertFirstIfDoesntContain(std::vector<char> &v, char c);
-
-template<typename T>
-void removeDuplicates(std::vector<T> &v);
+#include "Functions.h"
 
 #pragma warning(disable: 4786)
 
 
 using namespace std;
-
-template<typename T>
-void printVectorParameters(std::ostream &os, vector<T> vector) {
-    os << "size(): " << vector.size()
-       << ", capacity(): " << vector.capacity()
-       << ", max_size(): " << vector.max_size() << std::endl;
-    for (int i = 0; i < vector.size(); ++i) {
-        os << "vector[" << i << "]: " << vector[i] << std::endl;
-    }
-    os << std::endl;
-}
 
 int main() {
     // Контейнер стандартной библиотеки vector
@@ -177,23 +162,23 @@ int main() {
     //
     //Сравните размер, емкость векторов и значения элементов
     {
-    vector<int> vInt11;
-    vInt11.reserve(5);
-    for (size_t i = 0; i < vInt11.capacity(); i++) {
-        vInt11.push_back(i);
-    }
-    vector<int> vInt12;
-    for (size_t i = 0; i < 5; i++) {
-        vInt12.push_back(i);
-    }
+        vector<int> vInt11;
+        vInt11.reserve(5);
+        for (size_t i = 0; i < vInt11.capacity(); i++) {
+            vInt11.push_back(i);
+        }
+        vector<int> vInt12;
+        for (size_t i = 0; i < 5; i++) {
+            vInt12.push_back(i);
+        }
 
-    printVectorParameters(std::cout, vInt11); // size: 5, capacity: 5
-    printVectorParameters(std::cout, vInt12); // size: 5, capacity: 5
-    //!!! shrink_to_fit - Уменьшение емкости вектора.
-    //Для любого вектора из предыдущего задания требуется уменьшить емкость
-    //до size.
+        printVectorParameters(std::cout, vInt11); // size: 5, capacity: 5
+        printVectorParameters(std::cout, vInt12); // size: 5, capacity: 5
+        //!!! shrink_to_fit - Уменьшение емкости вектора.
+        //Для любого вектора из предыдущего задания требуется уменьшить емкость
+        //до size.
 
-    vInt11.shrink_to_fit();
+        vInt11.shrink_to_fit();
     }
     //Создание "двухмерного вектора" - вектора векторов
     //Задан одномерный массив int ar[] = {11,2,4,3,5};
@@ -266,45 +251,48 @@ int main() {
         printVectorParameters(std::cout, vChar);
 
 ///////////////////////////////////////////////////////////////////
-    //Создайте новый вектор таким образом, чтобы его элементы стали
-    //копиями элементов любого из созданных ранее векторов, но расположены
-    //были бы в обратном порядке
+        //Создайте новый вектор таким образом, чтобы его элементы стали
+        //копиями элементов любого из созданных ранее векторов, но расположены
+        //были бы в обратном порядке
         vector<char> vChar1(vChar.rbegin(), vChar.rend());
         printVectorParameters(std::cout, vChar1);
     }
 
 ///////////////////////////////////////////////////////////////////
+    {
+        //Задание 1. Списки. Операции, характерные для списков.
+        //Создайте пустой список из элементов Point - ptList1 и наполните
+        //его значениями с помощью методов push_back(),
+        //push_front, insert()
+        list<Point> ptList1;
+        ptList1.push_back(Point(1, 2));
+        ptList1.push_front(Point(3, 4));
+        ptList1.insert(++ptList1.begin(), Point());
 
-    //Задание 1. Списки. Операции, характерные для списков.
-    //Создайте пустой список из элементов Point - ptList1 и наполните
-    //его значениями с помощью методов push_back(),
-    //push_front, insert()
-
-
-    //Напишите шаблон функции, которая будет выводить элементы
-    //ЛЮБОГО КОНТЕЙНЕРА на печать. Проверьте работу шаблона на контейнерах
-    //vector и list. Подсказка - хотелось бы увидеть тип контейнера.
-
-
-    //Сделайте любой из списков "реверсивным" - reverse()
-
-
-    //Создайте список ptList2 из элементов Point таким образом, чтобы он стал
-    //копией вектора элементов типа Point, но значения элементов списка располагались
-    //бы в обратном порядке
+        //Напишите шаблон функции, которая будет выводить элементы
+        //ЛЮБОГО КОНТЕЙНЕРА на печать. Проверьте работу шаблона на контейнерах
+        //vector и list. Подсказка - хотелось бы увидеть тип контейнера.
 
 
+        //Сделайте любой из списков "реверсивным" - reverse()
 
-    //Отсортируйте списки  ptList1 и ptList2 - методом класса list - sort()
-    //по возрастанию.
-    //Подумайте: что должно быть перегружено в классе Point для того, чтобы
-    //работала сортировка
+
+        //Создайте список ptList2 из элементов Point таким образом, чтобы он стал
+        //копией вектора элементов типа Point, но значения элементов списка располагались
+        //бы в обратном порядке
 
 
 
+        //Отсортируйте списки  ptList1 и ptList2 - методом класса list - sort()
+        //по возрастанию.
+        //Подумайте: что должно быть перегружено в классе Point для того, чтобы
+        //работала сортировка
+
+        std::cout << std::endl;
+    }
 
 
-    std::cout << std::endl;
+
 
     //Объедините отсортированные списки - merge(). Посмотрите: что
     //при этом происходит с каждым списком.
@@ -346,25 +334,3 @@ int main() {
     return 0;
 }
 
-template<typename T>
-void removeDuplicates(vector<T> &v) {
-    for (typename vector<T>::iterator itb = v.begin(); itb != v.end() && (itb + 1) != v.end(); ++itb) {
-        for (typename vector<T>::iterator internal = itb + 1; internal != v.end();) {
-            if (*itb == *internal) {
-                internal = v.erase(internal);
-            } else {
-                ++internal;
-            }
-        }
-    }
-}
-
-void insertFirstIfDoesntContain(std::vector<char> &v, char c) {
-    vector<char>::iterator itb = v.begin();
-    for (; itb != v.end(); ++itb) {
-        if (*itb == c) {
-            return;
-        }
-    }
-    v.insert(v.begin(), c);
-}

@@ -7,4 +7,5 @@ add_executable(lab8
         lab_vector_list_deque.cpp
         myString.cpp myString.h
         Counter.cpp Counter.h
-        Point.h Point.cpp)
+        Point.h Point.cpp
+        Functions.h)

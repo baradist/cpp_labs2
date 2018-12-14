@@ -56,7 +56,9 @@ bool MyString::operator==(const MyString &that) {
 
 MyString &MyString::operator=(MyString &&that) {
     if (m_pMyCounter != that.m_pMyCounter) {
-        m_pMyCounter->removeUser();
+        if (m_pMyCounter != nullptr) {
+            m_pMyCounter->removeUser();
+        }
         m_pMyCounter = that.m_pMyCounter;
         that.m_pMyCounter = nullptr;
     }

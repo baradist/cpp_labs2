@@ -49,7 +49,7 @@ MyString::~MyString() {
     m_pMyCounter = nullptr;
 }
 
-bool MyString::operator==(const MyString &that) {
+bool MyString::operator==(const MyString &that) const {
     return m_pMyCounter == that.m_pMyCounter;
 }
 

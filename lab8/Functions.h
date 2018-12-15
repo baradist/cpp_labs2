@@ -5,11 +5,11 @@
 #include <vector>
 
 template<typename T>
-void printVectorParameters(std::ostream &os, std::vector<T> vector) {
+void printVectorParameters(std::ostream &os, const std::vector<T> &vector) {
     os << "size(): " << vector.size()
        << ", capacity(): " << vector.capacity()
        << ", max_size(): " << vector.max_size() << std::endl;
-    for (int i = 0; i < vector.size(); ++i) {
+    for (size_t i = 0; i < vector.size(); ++i) {
         os << "vector[" << i << "]: " << vector[i] << std::endl;
     }
     os << std::endl;
@@ -45,6 +45,27 @@ inline void printContainer(const T &cont) {
         std::cout << *itb << std::endl;
     }
     std::cout << std::endl;
+}
+
+template<typename T>
+std::ostream &operator<<(std::ostream &os, const std::vector<T> &vector) {
+
+    os << "vector.size(): " << vector.size() << ": \n";
+    for (size_t j = 0; j < vector.size(); j++) {
+        os << vector[j] << std::endl;
+    }
+    return os;
+}
+
+template<typename T>
+size_t duplicateCount(typename std::vector<T>::iterator begin, typename std::vector<T>::iterator end) {
+    size_t count = 0;
+    for (typename std::vector<T>::iterator it = begin + 1; it != end; ++it, count++) {
+        if (!(*it == *begin)) {
+            return count;
+        }
+    }
+    return count;
 }
 
 #endif //LAB8_FUNCTIONS_H

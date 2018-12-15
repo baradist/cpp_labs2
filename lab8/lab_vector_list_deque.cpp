@@ -76,10 +76,7 @@ int main() {
         // [0,5) массива вещественных чисел dMas. Предворительно массив dMas
         //нужно создать и проинициализировать!
         double dMas[6] = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6};
-        vector<double> vDouble3;
-        for (size_t i = 0; i < sizeof(dMas) / sizeof(double); i++) {
-            vDouble3.push_back(dMas[i]);
-        }
+        vector<double> vDouble3(dMas, dMas + sizeof(dMas) / sizeof(double));
         printVectorParameters(std::cout, vDouble3);
 
         //вектор вещественных - vDouble4, который является копией элементов
@@ -190,12 +187,14 @@ int main() {
     //...
     //Распечатайте содержимое такого двухмерного вектора по строкам
     {
-        vector<vector<int>> vv = {vector<int>(11, 1), vector<int>(2, 2), vector<int>(4, 4)};
-        printVectorParameters(std::cout, vv[0]);
-        printVectorParameters(std::cout, vv[1]);
-        printVectorParameters(std::cout, vv[2]);
+        int ar[] = {11, 2, 4, 3, 5};
+        size_t size = sizeof(ar) / sizeof(int);
+        vector<vector<int>> vv(size);
+        for (size_t i = 0; i < size; i++) {
+            vv[i].assign(ar[i], ar[i]);
+        }
 
-        std::cout << std::endl;
+        std::cout << vv << std::endl; // TODO
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -231,8 +230,9 @@ int main() {
         printVectorParameters(std::cout, vChar3);
 
         for (vector<char>::iterator itb = vChar3.begin(); (itb + 1) != vChar3.end() && itb != vChar3.end();) {
-            if (*itb == *(itb + 1)) {
-                itb = vChar3.erase(itb);
+            size_t dupCount = duplicateCount<char>(itb, vChar3.end());
+            if (dupCount) {
+                itb = vChar3.erase(itb, itb + dupCount);
             } else {
                 ++itb;
             }

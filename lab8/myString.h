@@ -27,7 +27,7 @@ public:
 
     ~MyString();
 
-    bool operator==(const MyString &that);
+    bool operator==(const MyString &that) const;
 
     MyString &operator=(MyString &&that);
 

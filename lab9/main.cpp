@@ -61,6 +61,7 @@ int main() {
         queue1.push(Point(4, 4));
         queue1.front() = Point(42, 42);
         queue1.back() = Point(43, 43);
+        print_queue(queue1);
         // TODO: destroy
 
     }
@@ -80,7 +81,7 @@ int main() {
         qPChar.push("1");
         qPChar.push("22");
 
-        print_queue(qPChar);
+        print_priority_queue(qPChar);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -130,10 +131,6 @@ int main() {
         map1.insert(pair<const char *, int>("Harris2", map1["Harris"]));
         map1.erase("Harris");
         print_map(map1);
-
-//        for (map<const char *, int>::iterator it = map1.begin(); it != map1.end(); ++it) {
-//            cout << it->first << "\t" << it->second << endl;
-//        }
 
         cout << endl;
     }
@@ -205,13 +202,23 @@ int main() {
     //в) Выведите все содержимое словаря на экран
     //г) Выведите на экран только варианты "переводов" для заданного ключа. Подсказка: для нахождения диапазона
     //		итераторов можно использовать методы lower_bound() и upper_bound()
+    {
+        multimap<string, string> dictionary = {
+                make_pair("free", "свободный"),
+                make_pair("free", "бесплатный"),
+                make_pair("master", "мастер"),
+                make_pair("master", "хозяин"),
+                make_pair("master", "наставник"),
+        };
+        dictionary.insert(make_pair("strange", "чужой"));
+        dictionary.insert(make_pair("strange", "странный"));
+        print_map(dictionary);
 
+        print_map_by_key(dictionary, string("strange"));
+        print_map_by_key(dictionary, string("master"));
+        print_map_by_key(dictionary, string("free"));
 
-
-
-
-
-    cout << endl;
-
+        cout << endl;
+    }
     return 0;
 }

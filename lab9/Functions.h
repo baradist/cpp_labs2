@@ -18,7 +18,17 @@ template<typename T>
 void
 print_queue(T q) {
     while (!q.empty()) {
-        cout << q.top() << " ";
+        cout << q.front() << endl;
+        q.pop();
+    }
+    std::cout << '\n';
+}
+
+template<typename T>
+void
+print_priority_queue(T q) {
+    while (!q.empty()) {
+        cout << q.top() << endl;
         q.pop();
     }
     std::cout << '\n';
@@ -29,6 +39,21 @@ typedef std::pair<string, std::pair<string, string> > T;
 template<typename map_key, typename map_val>
 void print_map(const std::map<map_key, map_val> &_map) {
     for (typename std::map<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
+        std::cout << it->first << " => " << it->second << '\n';
+    }
+}
+
+template<typename map_key, typename map_val>
+void print_map(const std::multimap<map_key, map_val> &_map) {
+    for (typename std::multimap<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
+        std::cout << it->first << " => " << it->second << '\n';
+    }
+}
+
+template<typename map_key, typename map_val>
+void print_map_by_key(const std::multimap<map_key, map_val> &_map, const map_key &key) {
+    for (typename std::multimap<map_key, map_val>::const_iterator it = _map.lower_bound(key);
+         it != _map.upper_bound(key); ++it) {
         std::cout << it->first << " => " << it->second << '\n';
     }
 }

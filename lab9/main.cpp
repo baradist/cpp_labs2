@@ -175,19 +175,20 @@ int main() {
         //
         //номера
         {
-            multiset<const char *> group1;
+            typedef multiset<const char *, std::greater<const char *>> MULTISET_CHARS_DESC;
+            MULTISET_CHARS_DESC group1;
             group1.insert("Иванов");
             group1.insert("Иванов");
             group1.insert("Петров");
             group1.insert("Сидоров");
-            multiset<const char *> group2;
+            MULTISET_CHARS_DESC group2;
             group2.insert("Фёдоров");
             group2.insert("Фёдоров");
             group2.insert("Фёдоров");
             group2.insert("Укупник");
             group2.insert("Стаценко");
 
-            map<int, multiset<const char *>> groups;
+            map<int, MULTISET_CHARS_DESC> groups;
             groups[41] = group1;
             groups[42] = group2;
             print_map(groups);

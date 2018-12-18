@@ -48,7 +48,7 @@ std::ostream &operator<<(std::ostream &os, const std::set<T> &set1) {
 }
 
 template<typename T>
-std::ostream &operator<<(std::ostream &os, const std::multiset<T> &set1) {
+std::ostream &operator<<(std::ostream &os, const std::multiset<T, std::greater<T>> &set1) { // TODO how to generalize?
     copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
     return os;
 }

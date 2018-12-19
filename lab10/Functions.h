@@ -71,4 +71,10 @@ ostream &operator<<(ostream &os, const multiset<T, greater<T>> &set1) {
     return os;
 }
 
+template<typename T>
+struct Print {
+    static void print(const T &t) {
+        std::cout << t << std::endl;
+    }
+};
 #endif //LAB9_FUNCTIONS_H

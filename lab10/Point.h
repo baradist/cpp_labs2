@@ -28,5 +28,9 @@ public:
 
     inline int getX() const { return m_x; };
 
+    inline void setX(int x) { m_x = x; };
+
     inline int getY() const { return m_y; };
+
+    inline void setY(int y) { m_y = y; };
 };

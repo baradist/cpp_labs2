@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "Point.h"
 #include "Functions.h"
+#include "Rect.h"
 
 using namespace std;
 
@@ -86,7 +87,7 @@ int main() {
         multiset<Point> multiset_points(vector_points.begin(), vector_points.end());
         cout << "find()" << endl;
         Point findValue = Point(4, 4);
-        for (multiset<Point>::iterator i = multiset_points.begin(),
+        for (auto i = multiset_points.begin(),
                      end = multiset_points.end(); i != end; ++i) {
             i = find(i, end, findValue);
             if (i != end) {
@@ -111,24 +112,38 @@ int main() {
         //итератор на элемент Point, удовлетворяющий условию: координаты x и y лежат в промежутке
         //[-n, +m].
         const int n = 2, m = 3;
-        multiset<Point>::iterator it = find_if(multiset_points.begin(), multiset_points.end(),
-                                               [](const Point &p) {
-                                                   return p.getX() >= -n && p.getX() <= m
-                                                          && p.getY() >= -n && p.getY() <= m;
-                                               }
+        auto it = find_if(multiset_points.begin(), multiset_points.end(),
+                          [](const Point &p) {
+                              return p.getX() >= -n && p.getX() <= m
+                                     && p.getY() >= -n && p.getY() <= m;
+                          }
         );
         cout << *it << endl;
 
         //С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,
         //располагая прямоугольники по удалению центра от начала координат.
-
-
-
-
-
+        Rect array_rects[] = {
+                Rect(RED, 1, 2, 3, 4),
+                Rect(GREEN, 2, 3, 4, 5),
+                Rect(BLUE, 3, 4, 5, 6),
+                Rect(RED, 3, 4, 1, 2),
+                Rect(GREEN, 4, 5, 2, 3),
+                Rect(BLUE, 5, 6, 3, 4),
+                Rect(RED, 3, 4, -1, -2),
+                Rect(GREEN, 4, 5, -2, -3),
+                Rect(BLUE, 5, 6, -3, -4),
+        };
+        sort(array_rects, array_rects + sizeof(array_rects) / sizeof(Rect),
+             [](const Rect &l, const Rect &r) {
+                 return l.remoteness() < r.remoteness();
+             });
+        copy(array_rects, array_rects + sizeof(array_rects) / sizeof(Rect),
+             ostream_iterator<Rect>(cout, "\n"));
     }
 
-    {//transform
+    {
+        //transform
+
         //Напишите функцию, которая с помощью алгоритма transform переводит
         //содержимое объекта string в нижний регистр.
         //Подсказка: класс string - это "почти" контейнер, поэтому для него
@@ -137,28 +152,36 @@ int main() {
 
         //Заполните list объектами string. С помощью алгоритма transform сформируте
         //значения "пустого" set, конвертируя строки в нижний регистр
-
-
-
-
-        cout << endl;
+        string str("Test String");
+        transform(str.begin(), str.end(), str.begin(), ::tolower);
+        cout << str << endl;
     }
-    {// map
+    {
+        // map
 
         //Сформируйте любым способом вектор с элементами типа string.
         //Создайте (и распечатайте для проверки) map<string, int>, который будет
         //содержать упорядоченные по алфавиту строки и
         //количество повторений каждой строки в векторе
-
-
-
-
-
-
-
+        vector<string> vector_strings = {
+                "one",
+                "two",
+                "two",
+                "three",
+                "three",
+                "three",
+                "four",
+                "four",
+                "four",
+                "four",
+        };
+        map<string, int> map_strings;
+        for (auto &vector_string : vector_strings) {
+            map_strings[vector_string]++;
+        }
+        print_map(map_strings);
 
     };
-
 
     return 0;
 }

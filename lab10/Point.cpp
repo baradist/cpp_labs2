@@ -4,10 +4,7 @@ Point::Point(int x, int y) : m_x(x), m_y(y) {
 }
 
 bool Point::operator==(const Point &that) const {
-    if (m_x == that.m_x && m_y == that.m_y)
-        return true;
-    else
-        return false;
+    return m_x == that.m_x && m_y == that.m_y;
 }
 
 bool Point::operator<(const Point &that) const {

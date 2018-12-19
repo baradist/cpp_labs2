@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(lab10
         Iter_Alg.cpp
         Point.cpp Point.h
-        Functions.h)
+        Functions.h
+        Rect.cpp Rect.h
+        Shape.cpp Shape.h)

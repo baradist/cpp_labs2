@@ -6,8 +6,8 @@
 #include <vector>
 #include <list>
 #include <set>
-#include <map>
-#include <algorithm>
+#include "Point.h"
+#include "Functions.h"
 
 using namespace std;
 
@@ -20,11 +20,15 @@ int main() {
     //Реверсивные итераторы. Сформируйте set<Point>. Подумайте, что
     //нужно перегрузить в классе Point. Создайте вектор, элементы которого
     //являются копиями элементов set, но упорядочены по убыванию
-
+    set<Point> set_points = {Point(1, 1), Point(2, 2), Point(3, 3), Point(4, 4),};
+    print_container(set_points);
+    vector<Point> vector_points_reversed(set_points.rbegin(), set_points.rend());
+    print_container(vector_points_reversed);
 
     //Потоковые итераторы. С помощью ostream_iterator выведите содержимое
     //vector и set из предыдущего задания на экран.
-
+    copy(set_points.begin(), set_points.end(), ostream_iterator<Point>(cout, "\n"));
+    copy(vector_points_reversed.begin(), vector_points_reversed.end(), ostream_iterator<Point>(cout, "\n"));
 
     //Итераторы вставки. С помощью возвращаемых функциями:
     //back_inserter()
@@ -32,8 +36,13 @@ int main() {
     //inserter()
     //итераторов вставки добавьте элементы в любой из созданных контейнеров. Подумайте:
     //какие из итераторов вставки можно использовать с каждым контейнером.
-
-
+    vector<int> vector_int = {11, 12, 13};
+    set<int> set_int = {1, 2, 3, 4, 5};
+    copy(set_int.begin(), set_int.end(), back_inserter(vector_int));
+    // error: ‘class std::vector<int>’ has no member named ‘push_front’
+//    copy(--set_int.end(), set_int.end(), front_inserter(vector_int));
+    copy(set_int.begin(), ++set_int.begin(), inserter(vector_int, ++vector_int.begin()));
+    print_container(vector_int);
 
 ///////////////////////////////////////////////////////////////////
 

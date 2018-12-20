@@ -6,55 +6,53 @@
 using namespace std;
 
 template<typename T>
-inline void printContainer(const T &cont) {
-    std::cout << "Container is a : " << typeid(cont).name() << std::endl;
+inline void print_container(const T &cont) {
+    cout << "Container is a : " << typeid(cont).name() << endl;
     for (typename T::const_iterator itb = cont.begin(); itb != cont.end(); ++itb) {
-        std::cout << *itb << std::endl;
+        cout << *itb << endl;
     }
-    std::cout << std::endl;
+    cout << endl;
 }
 
 template<typename T>
-void
-print_queue(T q) {
+void print_queue_of_pointers(T q) {
     while (!q.empty()) {
-        cout << q.front() << endl;
+        cout << *q.front() << endl;
         q.pop();
     }
-    std::cout << '\n';
+    cout << '\n';
 }
 
 template<typename T>
-void
-print_priority_queue(T q) {
+void print_from_top(T q) {
     while (!q.empty()) {
         cout << q.top() << endl;
         q.pop();
     }
-    std::cout << '\n';
+    cout << '\n';
 }
 
-typedef std::pair<string, std::pair<string, string> > T;
+typedef pair<string, pair<string, string> > T;
 
 template<typename map_key, typename map_val>
-void print_map(const std::map<map_key, map_val> &_map) {
-    for (typename std::map<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
-        std::cout << it->first << " => " << it->second << '\n';
+void print_map(const map<map_key, map_val> &_map) {
+    for (typename map<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
+        cout << it->first << " => " << it->second << '\n';
     }
 }
 
 template<typename map_key, typename map_val>
-void print_map(const std::multimap<map_key, map_val> &_map) {
-    for (typename std::multimap<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
-        std::cout << it->first << " => " << it->second << '\n';
+void print_map(const multimap<map_key, map_val> &_map) {
+    for (typename multimap<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
+        cout << it->first << " => " << it->second << '\n';
     }
 }
 
 template<typename map_key, typename map_val>
-void print_map_by_key(const std::multimap<map_key, map_val> &_map, const map_key &key) {
-    for (typename std::multimap<map_key, map_val>::const_iterator it = _map.lower_bound(key);
+void print_map_by_key(const multimap<map_key, map_val> &_map, const map_key &key) {
+    for (typename multimap<map_key, map_val>::const_iterator it = _map.lower_bound(key);
          it != _map.upper_bound(key); ++it) {
-        std::cout << it->first << " => " << it->second << '\n';
+        cout << it->first << " => " << it->second << '\n';
     }
 }
 
@@ -67,13 +65,13 @@ void print_map_by_key(const std::multimap<map_key, map_val> &_map, const map_key
 //};
 
 template<typename T>
-std::ostream &operator<<(std::ostream &os, const std::set<T> &set1) {
+ostream &operator<<(ostream &os, const set<T> &set1) {
     copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
     return os;
 }
 
 template<typename T>
-std::ostream &operator<<(std::ostream &os, const std::multiset<T, std::greater<T>> &set1) { // TODO how to generalize?
+ostream &operator<<(ostream &os, const multiset<T, greater<T>> &set1) { // TODO how to generalize?
     copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
     return os;
 }

@@ -16,17 +16,11 @@
 
 using namespace std;
 
-
 int main() {
-
 
     //Напишите шаблон функции для вывода значений stack, queue, priority_queue
     //обратите внимание на то, что контейнеры предоставляют РАЗНЫЕ методы для
     //получения значений
-
-
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////
     //stack
@@ -41,10 +35,8 @@ int main() {
         for (vector<int>::reverse_iterator it = vec.rbegin(); it != vec.rend(); ++it) {
             st.push(*it);
         }
-        printContainer(vec);
-        //    printContainer(st);
-        //    cout << st << endl;
-
+        print_container(vec);
+        print_from_top(st);
     }
     ////////////////////////////////////////////////////////////////////////////////////
     //queue
@@ -54,16 +46,21 @@ int main() {
     //Измените значения первого и последнего элементов посредством front() и back()
     //Подумайте, что требуется сделать при уничтожении такой очереди?
     {
-        queue<Point> queue1;
-        queue1.push(Point(1, 1));
-        queue1.push(Point(2, 2));
-        queue1.push(Point(3, 3));
-        queue1.push(Point(4, 4));
-        queue1.front() = Point(42, 42);
-        queue1.back() = Point(43, 43);
-        print_queue(queue1);
-        // TODO: destroy
-
+        queue<Point *, deque<Point *>> queue1;
+        queue1.push(new Point(1, 1));
+        queue1.push(new Point(2, 2));
+        queue1.push(new Point(3, 3));
+        queue1.push(new Point(4, 4));
+        delete queue1.front();
+        queue1.front() = new Point(42, 42);
+        delete queue1.back();
+        queue1.back() = new Point(43, 43);
+        print_queue_of_pointers(queue1);
+        while (!queue1.empty()) {
+            delete queue1.front();
+            queue1.pop();
+        }
+        cout << endl;
     }
     ////////////////////////////////////////////////////////////////////////////////////
     //priority_queue
@@ -81,7 +78,7 @@ int main() {
         qPChar.push("1");
         qPChar.push("22");
 
-        print_priority_queue(qPChar);
+        print_from_top(qPChar);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -90,30 +87,27 @@ int main() {
     //		в классе Point (и каким образом)
     //б) распечатайте значения элементов с помощью шаблона, реализованного в предыдущей лаб. работе
     //в) попробуйте изменить любое значение...
-    //г) Создайте два множества, которые будут содержать одинаковые значения
-    //		типа int, но занесенные в разном порядке
-    //д) Вставьте в любое множество диапазон элементов из любого другого
-    //	контейнера, например, элементов массива	(что происходит, если в массиве имеются дубли?)
     {
         set<Point> set1;
         set1.insert(Point(1, 1));
         set1.insert(Point(2, 2));
         set1.insert(Point(3, 3));
         set1.insert(Point(4, 4));
-        printContainer(set1);
+        print_container(set1);
         //    *(set1.begin()) = Point(42, 42);
-        //    printContainer(set1);
-        set<int> sInt;
-        sInt.insert(1);
-        sInt.insert(2);
-        sInt.insert(3);
-        sInt.insert(4);
-        printContainer(sInt);
+        //    print_container(set1);
+
+        //г) Создайте два множества, которые будут содержать одинаковые значения
+        //		типа int, но занесенные в разном порядке
+        //д) Вставьте в любое множество диапазон элементов из любого другого
+        //	контейнера, например, элементов массива	(что происходит, если в массиве имеются дубли?)
+        set<int> sInt = {1, 2, 3, 4};
+        print_container(sInt);
         set<int> sInt2(sInt.rbegin(), sInt.rend());
-        printContainer(sInt2); // set has no ordering
+        print_container(sInt2); // set has no ordering
         int arr[] = {4, 5, 6};
         sInt.insert(arr, arr + sizeof(arr) / sizeof(int));
-        printContainer(sInt); // set can't have duplicates
+        print_container(sInt); // set can't have duplicates
     }
     ////////////////////////////////////////////////////////////////////////////////////
     //map, multiset
@@ -124,10 +118,12 @@ int main() {
 
     //г) замените один из КЛЮЧЕЙ на новый (была "Иванова", вышла замуж => стала "Петрова")
     {
-        map<const char *, int> map1;
-        map1.insert(pair<const char *, int>("Doe", 150000));
-        map1.insert(pair<const char *, int>("Norris", 180000));
+        map<const char *, int> map1 = {
+                make_pair("Doe", 150000),
+                make_pair("Norris", 180000),
+        };
         map1["Harris"] = 100000;
+        print_map(map1);
         map1.insert(pair<const char *, int>("Harris2", map1["Harris"]));
         map1.erase("Harris");
         print_map(map1);
@@ -191,7 +187,6 @@ int main() {
             print_map(groups);
         }
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////
     //multimap

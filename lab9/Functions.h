@@ -2,6 +2,7 @@
 #define LAB9_FUNCTIONS_H
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -14,29 +15,46 @@ inline void print_container(const T &cont) {
     cout << endl;
 }
 
+//template<typename T>
+//void print_queue_of_pointers(T q) {
+//    while (!q.empty()) {
+//        cout << *q.front() << endl;
+//        q.pop();
+//    }
+//    cout << '\n';
+//}
+
+
+template<typename Ad> 
+const typename Ad::value_type& Get(const Ad& a) {
+	return a.top();
+}
+
+template<typename T, typename C>
+const T& Get(const queue<T,C>& a) {
+	return a.front();
+}
+
 template<typename T>
-void print_queue_of_pointers(T q) {
+const T& Get(const queue<T*>& a) {
+	return *a.front();
+}
+
+
+template<typename T>
+void print_adapter(T q) {
     while (!q.empty()) {
-        cout << *q.front() << endl;
+        cout << /*q.top()*/ Get(q)<< endl;
         q.pop();
     }
     cout << '\n';
 }
 
-template<typename T>
-void print_from_top(T q) {
-    while (!q.empty()) {
-        cout << q.top() << endl;
-        q.pop();
-    }
-    cout << '\n';
-}
-
-typedef pair<string, pair<string, string> > T;
+//typedef pair<string, pair<string, string> > T;
 
 template<typename map_key, typename map_val>
 void print_map(const map<map_key, map_val> &_map) {
-    for (typename map<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
+    for (typename map<const map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
         cout << it->first << " => " << it->second << '\n';
     }
 }
@@ -56,24 +74,24 @@ void print_map_by_key(const multimap<map_key, map_val> &_map, const map_key &key
     }
 }
 
-// // ambiguous-function
-//template<typename FROM, typename TO>
-//void copy(FROM first, FROM last, TO to) {
-//    for ( ; first != last; ++first, ++to) {
-//        *to = *first;
-//    }
-//};
+//// // ambiguous-function
+////template<typename FROM, typename TO>
+////void copy(FROM first, FROM last, TO to) {
+////    for ( ; first != last; ++first, ++to) {
+////        *to = *first;
+////    }
+////};
+
 
 template<typename T>
 ostream &operator<<(ostream &os, const set<T> &set1) {
     copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
     return os;
 }
-
 template<typename T>
-ostream &operator<<(ostream &os, const multiset<T, greater<T>> &set1) { // TODO how to generalize?
-    copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
-    return os;
+ostream &operator<<(ostream &os, const multiset<T> &set1) {
+	copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
+	return os;
 }
 
 #endif //LAB9_FUNCTIONS_H

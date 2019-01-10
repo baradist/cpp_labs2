@@ -10,6 +10,7 @@
 #include <set>
 #include <map>
 #include <iterator>
+#include <utility>
 
 #include "Functions.h"
 #include "Point.h"
@@ -28,16 +29,18 @@ int main() {
     //Создайте стек таким образом, чтобы
     //а) элементы стека стали копиями элементов вектора
     //б) при выводе значений как вектора, так и стека порядок значений был одинаковым
-
+	
     {
-        vector<int> vec = {1, 2, 3, 4};
-        stack<int> st;
-        for (vector<int>::reverse_iterator it = vec.rbegin(); it != vec.rend(); ++it) {
-            st.push(*it);
-        }
+ 
+		vector<int> vec = {1, 2, 3, 4};
+        stack<int, vector<int>> st(vector<int>(vec.rbegin(), vec.rend()));
+        //for (vector<int>::reverse_iterator it = vec.rbegin(); it != vec.rend(); ++it) {
+        //    st.push(*it);
+        //}
         print_container(vec);
-        print_from_top(st);
+        print_adapter(st);
     }
+	
     ////////////////////////////////////////////////////////////////////////////////////
     //queue
 
@@ -55,7 +58,11 @@ int main() {
         queue1.front() = new Point(42, 42);
         delete queue1.back();
         queue1.back() = new Point(43, 43);
-        print_queue_of_pointers(queue1);
+
+		print_adapter(queue1);
+
+        //print_queue_of_pointers(queue1);
+		print_adapter(queue1);
         while (!queue1.empty()) {
             delete queue1.front();
             queue1.pop();
@@ -78,7 +85,7 @@ int main() {
         qPChar.push("1");
         qPChar.push("22");
 
-        print_from_top(qPChar);
+        print_adapter(qPChar);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -140,8 +147,11 @@ int main() {
         for (vector<string>::iterator it = vString.begin(); it != vString.end(); ++it) {
             map2[*it]++;
         }
-        print_map(map2);
+        print_map(map2); // TODO
     }
+	string * p = new string("asdf");
+	const  type_info&ti = typeid (p);
+	cout << ti.name();
     //е)
     //задан массив:
     //const char* words[] = {"Abba", "Alfa", "Beta", "Beauty" ,...};
@@ -168,7 +178,8 @@ int main() {
         //
         //номера
         {
-            typedef multiset<const char *, std::greater<const char *>> MULTISET_CHARS_DESC;
+            //typedef multiset<const char *, std::greater<const char *>> MULTISET_CHARS_DESC;
+			typedef multiset<const char *> MULTISET_CHARS_DESC;
             MULTISET_CHARS_DESC group1;
             group1.insert("Иванов");
             group1.insert("Иванов");

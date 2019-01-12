@@ -8,4 +8,5 @@ add_executable(lab10
         Point.cpp Point.h
         Functions.h
         Rect.cpp Rect.h
-        Shape.cpp Shape.h)
+        Shape.cpp Shape.h
+        Predicates.h)

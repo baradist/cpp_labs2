@@ -4,12 +4,14 @@
 
 #include <iostream>
 #include <vector>
+#include <list>
 #include <set>
 #include <algorithm>
+#include <string>
 #include "Point.h"
 #include "Functions.h"
 #include "Rect.h"
-#include <string>
+#include "Predicates.h"
 
 using namespace std;
 
@@ -63,11 +65,7 @@ int main() {
         //С помощью алгоритма for_each в любой последовательности с элементами типа Point
         //измените "координаты" на указанное значение (такой предикат тоже стоит реализовать
         //как шаблон) и выведите результат с помощью предыдущего предиката
-        auto lambda_change_point_coords = [](Point &p) {
-            p.setX(p.getX() + 10);
-            p.setY(p.getY() + 10);
-        };
-        for_each(vector_points_reversed.begin(), vector_points_reversed.end(), lambda_change_point_coords);
+        for_each(vector_points_reversed.begin(), vector_points_reversed.end(), ChangeCords(10));
         for_each(vector_points_reversed.begin(), vector_points_reversed.end(), Print<Point>::print);
     }
     //С помощью алгоритма find() найдите в любой последовательности элементов Point
@@ -149,13 +147,16 @@ int main() {
         //содержимое объекта string в нижний регистр.
         //Подсказка: класс string - это "почти" контейнер, поэтому для него
         // определены методы begin() и end()
-
-
-        //Заполните list объектами string. С помощью алгоритма transform сформируте
-        //значения "пустого" set, конвертируя строки в нижний регистр
         string str("Test String");
         transform(str.begin(), str.end(), str.begin(), ::tolower);
         cout << str << endl;
+
+        //Заполните list объектами string. С помощью алгоритма transform сформируте
+        //значения "пустого" set, конвертируя строки в нижний регистр
+        list<string> strings = { "One", "Two", "Three" };
+        set<string> set_strings;
+//        transform(strings.begin(), strings.end(), inserter(set_strings, set_strings.end()), ::tolower); // TODO
+        print_container(set_strings);
     }
     {
         // map
@@ -181,7 +182,6 @@ int main() {
             map_strings[vector_string]++;
         }
         print_map(map_strings);
-
     };
 
     return 0;

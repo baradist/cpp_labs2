@@ -1,13 +1,13 @@
 #include "Rect.h"
 #include <cmath>
 
-Rect::Rect(Color color, int left, int right, int top, int bottom) : Shape(color) {
-    m_left = left;
-    m_top = top;
-    m_right = right;
-    m_bottom = bottom;
-    normalize();
-}
+//Rect::Rect(Color color, int left, int right, int top, int bottom) : Shape(color) {
+//    m_left = left;
+//    m_top = top;
+//    m_right = right;
+//    m_bottom = bottom;
+//    normalize();
+//}
 
 void Rect::normalize() {
     if (m_left > m_right) {

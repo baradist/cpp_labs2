@@ -8,7 +8,13 @@ class Rect : public Shape {
 public:
     Rect() = default;
 
-    explicit Rect(Color color = RED, int left = 0, int top = 0, int right = 0, int bottom = 0);
+    explicit Rect(Color color = RED, int left = 0, int top = 0, int right = 0, int bottom = 0) : Shape(color) {
+		m_left = left;
+		m_top = top;
+		m_right = right;
+		m_bottom = bottom;
+		normalize();
+	};
 
     Rect(const Rect &that) = default;
 
@@ -18,7 +24,7 @@ public:
 
     virtual bool operator==(const Shape &r) const;
 
-    Rect &operator=(const Shape &that);
+    Rect &operator=(const Shape &that) throw();
 
     void normalize();
 

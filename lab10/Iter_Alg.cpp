@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Functions.h"
 #include "Rect.h"
+#include <string>
 
 using namespace std;
 
@@ -113,7 +114,7 @@ int main() {
         //[-n, +m].
         const int n = 2, m = 3;
         auto it = find_if(multiset_points.begin(), multiset_points.end(),
-                          [](const Point &p) {
+                          [n, m](const Point &p) {
                               return p.getX() >= -n && p.getX() <= m
                                      && p.getY() >= -n && p.getY() <= m;
                           }

@@ -15,16 +15,6 @@ inline void print_container(const T &cont) {
     cout << endl;
 }
 
-//template<typename T>
-//void print_queue_of_pointers(T q) {
-//    while (!q.empty()) {
-//        cout << *q.front() << endl;
-//        q.pop();
-//    }
-//    cout << '\n';
-//}
-
-
 template<typename Ad> 
 const typename Ad::value_type& Get(const Ad& a) {
 	return a.top();
@@ -40,7 +30,6 @@ const T& Get(const queue<T*>& a) {
 	return *a.front();
 }
 
-
 template<typename T>
 void print_adapter(T q) {
     while (!q.empty()) {
@@ -50,12 +39,10 @@ void print_adapter(T q) {
     cout << '\n';
 }
 
-//typedef pair<string, pair<string, string> > T;
-
 template<typename map_key, typename map_val>
 void print_map(const map<map_key, map_val> &_map) {
     for (typename map<const map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
-        cout << it->first << " => " << it->second << '\n';
+        cout << it->first << " => " << /*it->second <<*/ '\n'; // TODO
     }
 }
 
@@ -73,15 +60,6 @@ void print_map_by_key(const multimap<map_key, map_val> &_map, const map_key &key
         cout << it->first << " => " << it->second << '\n';
     }
 }
-
-//// // ambiguous-function
-////template<typename FROM, typename TO>
-////void copy(FROM first, FROM last, TO to) {
-////    for ( ; first != last; ++first, ++to) {
-////        *to = *first;
-////    }
-////};
-
 
 template<typename T>
 ostream &operator<<(ostream &os, const set<T> &set1) {

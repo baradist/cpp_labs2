@@ -39,22 +39,22 @@ void print_adapter(T q) {
     cout << '\n';
 }
 
-template<typename map_key, typename map_val>
-void print_map(const map<map_key, map_val> &_map) {
+template<typename map_key, typename map_val, typename C>
+void print_map(const map<map_key, map_val, C> &_map) {
     for (typename map<const map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
         cout << it->first << " => " << /*it->second <<*/ '\n'; // TODO
     }
 }
 
-template<typename map_key, typename map_val>
-void print_map(const multimap<map_key, map_val> &_map) {
+template<typename map_key, typename map_val, typename C>
+void print_map(const multimap<map_key, map_val, C> &_map) {
     for (typename multimap<map_key, map_val>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
         cout << it->first << " => " << it->second << '\n';
     }
 }
 
-template<typename map_key, typename map_val>
-void print_map_by_key(const multimap<map_key, map_val> &_map, const map_key &key) {
+template<typename map_key, typename map_val, typename C>
+void print_map_by_key(const multimap<map_key, map_val, C> &_map, const map_key &key) {
     for (typename multimap<map_key, map_val>::const_iterator it = _map.lower_bound(key);
          it != _map.upper_bound(key); ++it) {
         cout << it->first << " => " << it->second << '\n';

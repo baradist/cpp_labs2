@@ -125,7 +125,7 @@ int main() {
 
     //г) замените один из КЛЮЧЕЙ на новый (была "Иванова", вышла замуж => стала "Петрова")
     {
-        map<const char *, int> map1 = {
+		map<const char *, int, decltype(cmp)> map1 = {
                 make_pair("Doe", 150000),
                 make_pair("Norris", 180000),
         };

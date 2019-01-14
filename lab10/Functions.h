@@ -65,10 +65,4 @@ ostream &operator<<(ostream &os, const set<T> &set1) {
     return os;
 }
 
-template<typename T>
-ostream &operator<<(ostream &os, const multiset<T, greater<T>> &set1) {
-    copy(set1.begin(), set1.end(), ostream_iterator<T>(os, " "));
-    return os;
-}
-
 #endif //LAB9_FUNCTIONS_H

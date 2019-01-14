@@ -140,22 +140,26 @@ int main() {
              ostream_iterator<Rect>(cout, "\n"));
     }
 
-    {
-        //transform
+	{
+		//transform
 
-        //Напишите функцию, которая с помощью алгоритма transform переводит
-        //содержимое объекта string в нижний регистр.
-        //Подсказка: класс string - это "почти" контейнер, поэтому для него
-        // определены методы begin() и end()
-        string str("Test String");
-        transform(str.begin(), str.end(), str.begin(), ::tolower);
-        cout << str << endl;
+		//Напишите функцию, которая с помощью алгоритма transform переводит
+		//содержимое объекта string в нижний регистр.
+		//Подсказка: класс string - это "почти" контейнер, поэтому для него
+		// определены методы begin() и end()
+		string str("Test String");
+		transform(str.begin(), str.end(), str.begin(), ::tolower);
+		cout << str << endl;
 
-        //Заполните list объектами string. С помощью алгоритма transform сформируте
-        //значения "пустого" set, конвертируя строки в нижний регистр
-        list<string> strings = { "One", "Two", "Three" };
-        set<string> set_strings;
-//        transform(strings.begin(), strings.end(), inserter(set_strings, set_strings.end()), ::tolower); // TODO
+		//Заполните list объектами string. С помощью алгоритма transform сформируте
+		//значения "пустого" set, конвертируя строки в нижний регистр
+		list<string> strings = { "One", "Two", "Three" };
+		set<string> set_strings;
+		auto string_to_lower = [](string str) {
+			transform(str.begin(), str.end(), str.begin(), ::tolower);
+			return str;
+		};
+        transform(strings.begin(), strings.end(), inserter(set_strings, set_strings.end()), string_to_lower); // TODO
         print_container(set_strings);
     }
     {
@@ -178,7 +182,7 @@ int main() {
                 "four",
         };
         map<string, int> map_strings;
-        for (auto &vector_string : vector_strings) {
+        for (string &vector_string : vector_strings) {
             map_strings[vector_string]++;
         }
         print_map(map_strings);

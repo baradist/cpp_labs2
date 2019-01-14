@@ -6,7 +6,7 @@ class Rect : public Shape {
     int m_left, m_right, m_top, m_bottom;
 
 public:
-    Rect() = default;
+    //Rect() = default;
 
     explicit Rect(Color color = RED, int left = 0, int top = 0, int right = 0, int bottom = 0) : Shape(color) {
 		m_left = left;
